@@ -84,21 +84,127 @@ body {
 .content-layer {
   max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem 3rem;
   display: none;
 }
 
 .site-shell[data-state="content"] .gateway { display: none; }
 .site-shell[data-state="content"] .content-layer { display: block; }
 
-@media (max-width: 640px) {
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #d8d8d4;
+  padding-bottom: 0.9rem;
+}
+
+.brand {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2a2a2a;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 0.95rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.topbar a {
+  text-decoration: none;
+  color: #3a3a3a;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topbar a:hover,
+.topbar a:focus-visible {
+  color: #111;
+}
+
+.home-intro {
+  margin-top: 1.5rem;
+  max-width: 68ch;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+
+.home-intro h2 {
+  margin: 0.45rem 0 0.8rem;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.home-intro p {
+  margin: 0;
+  line-height: 1.65;
+  color: #2e2e2e;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.home-card {
+  border: 1px solid #d8d8d4;
+  background: #fafaf8;
+  padding: 1rem;
+}
+
+.home-card h3,
+.home-text-block h3 {
+  margin: 0;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.home-card p,
+.home-text-block p {
+  margin: 0.55rem 0 0;
+  line-height: 1.6;
+  color: #2d2d2d;
+}
+
+.home-card a,
+.home-text-block a {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: #171717;
+}
+
+.home-text-block {
+  margin-top: 1rem;
+  border-top: 1px solid #d8d8d4;
+  padding-top: 1rem;
+}
+
+@media (max-width: 700px) {
   .gateway-image {
     object-position: center 34%;
   }
 
   .gateway-topbar {
-    align-items: stretch;
+    align-items: flex-start;
     flex-direction: column;
+    gap: 30px;
   }
 
   .title-band {
@@ -106,6 +212,26 @@ body {
   }
 
   .enter-btn {
-    align-self: flex-end;
+    align-self: flex-start;
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .content-layer {
+    padding-top: 1rem;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topbar nav {
+    justify-content: flex-start;
+    gap: 0.7rem;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr;
   }
 }
