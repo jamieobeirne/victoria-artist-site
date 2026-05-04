@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victoria Artist Site</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="site-shell" data-state="gateway">
+      <section class="gateway" aria-labelledby="gateway-title">
+        <img
+          class="gateway-image"
+          src="./assets/images/landing-full-view.jpg"
+          alt="Pencil drawing used as the landing gateway artwork"
+        />
+        <div class="gateway-overlay">
+          <div class="gateway-topbar">
+            <div class="title-band">
+              <h1 id="gateway-title">Victoria Ruiz Diaz</h1>
+            </div>
+            <button id="enter-btn" class="enter-btn" type="button">Entrar</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="content-layer" class="content-layer" aria-hidden="true">
+        <header class="topbar">
+          <p class="brand">Victoria</p>
+          <nav aria-label="Primary">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </header>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
