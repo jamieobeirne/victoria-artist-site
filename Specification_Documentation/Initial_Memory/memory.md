@@ -19,7 +19,7 @@ Create a contemplative, unhurried website experience that invites visitors to st
 1. Entry screen: one strong image and a clear `ENTER` call to action.
 2. Content layer: easy navigation to artwork and texts with low cognitive load.
 
-Reference interaction model: [samanthakeelysmith.com](https://samanthakeelysmith.com/) entrance pattern (single-image gateway plus explicit entry action).
+Reference interaction model: [samanthakeelysmith.com](https://github.com/jamieobeirne/victoria-artist-site.git) entrance pattern (single-image gateway plus explicit entry action).
 
 ## AI Engineering Framework (7 Points)
 This framework guides planning, build decisions, and quality checks.

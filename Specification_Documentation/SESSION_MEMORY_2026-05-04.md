@@ -83,3 +83,31 @@
 - Optionally add mobile-specific crop with `<picture>` sources.
 - Replace placeholder content section with real artwork/about/contact content.
 - Decide when to migrate prototype to Next.js if admin panel work begins.
+
+## Additional Work Completed (Late Session)
+
+### 8) Homepage Layout Refactor (Post-Entry View)
+- Replaced the simple content-layer section with a two-column, gallery-style homepage inspired by the provided reference.
+- New structure:
+  - Left sidebar: name, category, year ranges, secondary links, artwork metadata.
+  - Right stage: large featured image panel.
+- Added and wired new image asset:
+  - `assets/images/homePageImage.jpg`
+- Updated responsive rules so sidebar and image stack on smaller screens.
+
+### 9) Gateway Mobile Alignment Adjustments
+- Updated mobile breakpoint behavior under `700px`.
+- Ensured `Entrar` sits below the name and left-aligned with consistent spacing.
+
+### 10) Landing Image Clarity Troubleshooting
+- Investigated perceived pixelation despite large image dimensions.
+- Removed incorrect `srcset` declaration that labeled the 4960px file as `1920w`.
+- Applied subtle CSS rendering tweaks for sharper perceived detail:
+  - Increased contrast.
+  - Added rendering hints.
+- Documented recommended export standards for future assets.
+
+### 11) Spanish Communication Template Requested
+- Prepared a reusable Spanish request message for obtaining better source files from the artist:
+  - Request highest-quality original/master file.
+  - If export is needed: sRGB, long edge 4000-5000px, JPEG 92-95 or WebP 88-92, minimal smoothing, light sharpening.

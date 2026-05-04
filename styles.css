@@ -21,7 +21,9 @@ body {
   height: 100vh;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(100%) contrast(1.05);
+  filter: grayscale(100%) contrast(1.16) saturate(1.02) brightness(0.99);
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .gateway-overlay {
@@ -82,118 +84,100 @@ body {
 }
 
 .content-layer {
-  max-width: 980px;
+  width: min(1320px, 100%);
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  padding: 20px 20px 24px;
   display: none;
 }
 
 .site-shell[data-state="content"] .gateway { display: none; }
 .site-shell[data-state="content"] .content-layer { display: block; }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid #d8d8d4;
-  padding-bottom: 0.9rem;
-}
-
-.brand {
-  margin: 0;
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #2a2a2a;
-}
-
-.topbar nav {
-  display: flex;
-  gap: 0.95rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.topbar a {
-  text-decoration: none;
-  color: #3a3a3a;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.topbar a:hover,
-.topbar a:focus-visible {
-  color: #111;
-}
-
-.home-intro {
-  margin-top: 1.5rem;
-  max-width: 68ch;
-}
-
-.kicker {
-  margin: 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-}
-
-.home-intro h2 {
-  margin: 0.45rem 0 0.8rem;
-  font-size: clamp(1.3rem, 2.8vw, 2rem);
-  font-weight: 400;
-  letter-spacing: 0.03em;
-}
-
-.home-intro p {
-  margin: 0;
-  line-height: 1.65;
-  color: #2e2e2e;
-}
-
-.home-grid {
+.content-shell {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1.2rem;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(20px, 4vw, 54px);
+  align-items: start;
+  min-height: calc(100vh - 40px);
 }
 
-.home-card {
-  border: 1px solid #d8d8d4;
-  background: #fafaf8;
-  padding: 1rem;
+.content-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 40px);
+  color: #202020;
 }
 
-.home-card h3,
-.home-text-block h3 {
+.sidebar-name {
   margin: 0;
-  font-size: 0.86rem;
-  letter-spacing: 0.12em;
+  font-size: clamp(1.62rem, 2.3vw, 2.1rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   font-weight: 500;
 }
 
-.home-card p,
-.home-text-block p {
+.sidebar-label {
   margin: 0.55rem 0 0;
-  line-height: 1.6;
-  color: #2d2d2d;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #505050;
 }
 
-.home-card a,
-.home-text-block a {
-  display: inline-block;
-  margin-top: 0.65rem;
-  color: #171717;
+.sidebar-nav {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.home-text-block {
-  margin-top: 1rem;
-  border-top: 1px solid #d8d8d4;
-  padding-top: 1rem;
+.sidebar-nav a {
+  color: #252525;
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+
+.sidebar-secondary {
+  margin-top: 1.5rem;
+}
+
+.sidebar-secondary a {
+  color: #505050;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1.2rem;
+}
+
+.sidebar-footer h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidebar-footer p {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #424242;
+}
+
+.sidebar-controls a {
+  color: #232323;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.76rem;
+}
+
+.content-stage img {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  object-fit: contain;
+  object-position: center top;
+  border: 1px solid #cdcdc9;
+  background: #e8e8e5;
 }
 
 @media (max-width: 700px) {
@@ -218,20 +202,34 @@ body {
   }
 
   .content-layer {
-    padding-top: 1rem;
+    padding: 14px;
   }
 
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .topbar nav {
-    justify-content: flex-start;
-    gap: 0.7rem;
-  }
-
-  .home-grid {
+  .content-shell {
     grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 16px;
+  }
+
+  .content-sidebar {
+    min-height: auto;
+  }
+
+  .sidebar-nav {
+    margin-top: 1rem;
+    gap: 0.28rem;
+  }
+
+  .sidebar-secondary {
+    margin-top: 1rem;
+  }
+
+  .sidebar-footer {
+    margin-top: 1.2rem;
+    border-top: 1px solid #d8d8d4;
+  }
+
+  .content-stage img {
+    max-height: none;
   }
 }
