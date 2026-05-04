@@ -111,3 +111,19 @@
 - Prepared a reusable Spanish request message for obtaining better source files from the artist:
   - Request highest-quality original/master file.
   - If export is needed: sRGB, long edge 4000-5000px, JPEG 92-95 or WebP 88-92, minimal smoothing, light sharpening.
+
+### 12) Name Visibility and Legibility Iterations
+- Increased gateway and sidebar name prominence:
+  - Larger size and stronger font weight.
+  - Refined letter spacing and contrast.
+- Added a minimal translucent background strip behind the landing title.
+- Applied a stronger readability option combining:
+  - Subtle top gradient overlay on the landing image.
+  - Clearer title band with improved opacity, border, and blur.
+  - Dark high-contrast title text inside the strip.
+
+### 13) Image Clarity Follow-Up
+- Confirmed large source dimensions were sufficient.
+- Clarified likely quality bottleneck is source compression/export chain.
+- Removed incorrect one-source `srcset` width declaration.
+- Added guidance to request better originals and export with high-quality settings.

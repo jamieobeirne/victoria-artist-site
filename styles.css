@@ -34,6 +34,12 @@ body {
   align-items: flex-start;
   padding: clamp(1.25rem, 3vw, 2rem);
   color: #242424;
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 248, 246, 0.2) 0%,
+    rgba(248, 248, 246, 0.06) 22%,
+    rgba(248, 248, 246, 0) 48%
+  );
 }
 
 .gateway-topbar {
@@ -46,18 +52,20 @@ body {
 
 .title-band {
   width: min(100%, 560px);
-  background: transparent;
-  padding: 0;
+  background: rgba(244, 244, 241, 0.5);
+  border: 1px solid rgba(244, 244, 241, 0.72);
+  padding: 0.48rem 0.78rem;
+  backdrop-filter: blur(2px);
 }
 
 .title-band h1 {
   margin: 0;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: clamp(1.05rem, 2.6vw, 2rem);
-  color: #f3f3f1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 3px 14px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.14em;
+  font-size: clamp(1.15rem, 2.8vw, 2.2rem);
+  color: #141414;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
 }
 
 .title-band p {
@@ -110,11 +118,12 @@ body {
 
 .sidebar-name {
   margin: 0;
-  font-size: clamp(1.62rem, 2.3vw, 2.1rem);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
   line-height: 0.9;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+  color: #121212;
 }
 
 .sidebar-label {
