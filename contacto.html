@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto — Victoria Ruiz Diaz</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="site-shell" data-state="content">
+    <div class="content-layer">
+      <div class="content-shell">
+        <aside class="content-sidebar" aria-label="Menu principal">
+          <div>
+            <a href="./index.html" class="inner-page-name">
+              <h2 class="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
+            </a>
+            <p class="sidebar-label">dibujo e ilustracion</p>
+          </div>
+
+          <nav class="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+            <a href="./trabajo.html">Trabajo</a>
+            <a href="./proyectos.html">Proyectos</a>
+            <a href="./statement.html">Statement</a>
+            <a href="./bio.html">Bio</a>
+            <a href="./contacto.html" class="nav-active">Contacto</a>
+          </nav>
+        </aside>
+
+        <section class="inner-stage" aria-label="Contacto">
+          <header class="inner-header">
+            <h3 class="inner-heading">Contacto</h3>
+          </header>
+
+          <form class="contact-form" name="contacto" action="#" method="post">
+            <div class="form-field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" />
+            </div>
+            <div class="form-field">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="6"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Enviar</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

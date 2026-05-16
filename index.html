@@ -1,70 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Victoria Artist Site</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main class="site-shell" data-state="gateway">
-      <section class="gateway" aria-labelledby="gateway-title">
-        <img
-          class="gateway-image"
-          src="./assets/images/landing-full-view.jpg"
-          alt="Pencil drawing used as the landing gateway artwork"
-        />
-        <div class="gateway-overlay">
-          <div class="gateway-topbar">
-            <div class="title-band">
-              <h1 id="gateway-title">Victoria Ruiz Diaz</h1>
-            </div>
-            <button id="enter-btn" class="enter-btn" type="button">Entrar</button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victoria Artist Site</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="site-shell" data-state="gateway">
+    <section class="gateway" aria-labelledby="gateway-title">
+      <img class="gateway-image" src="./assets/images/landing-full-view.jpg"
+        alt="Pencil drawing used as the landing gateway artwork" />
+      <div class="gateway-overlay">
+        <div class="gateway-topbar">
+          <div class="title-band">
+            <h1 id="gateway-title">Victoria Ruiz Diaz</h1>
           </div>
+          <button id="enter-btn" class="enter-btn" type="button">Entrar</button>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="content-layer" class="content-layer" aria-hidden="true">
-        <div class="content-shell">
-          <aside class="content-sidebar" aria-label="Menu principal">
-            <div>
-              <h2 class="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
-              <p class="sidebar-label">dibujo e ilustracion</p>
-            </div>
+    <section id="content-layer" class="content-layer" aria-hidden="true">
+      <div class="content-shell">
+        <aside class="content-sidebar" aria-label="Menu principal">
+          <div>
+            <h2 class="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
+            <p class="sidebar-label">dibujo e ilustracion</p>
+          </div>
 
-            <nav class="sidebar-nav" aria-label="Navegacion de obra">
-              <a href="#">2024 - 2026</a>
-              <a href="#">2021 - 2023</a>
-              <a href="#">2015 - 2020</a>
-              <a href="#">2011 - 2014</a>
-              <a href="#">retratos</a>
-            </nav>
+          <nav class="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+            <a href="./trabajo.html">Trabajo</a>
+            <a href="./proyectos.html">Proyectos</a>
+            <a href="./statement.html">Statement</a>
+            <a href="./bio.html">Bio</a>
+            <a href="./contacto.html">Contacto</a>
+          </nav>
 
-            <nav class="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-              <a href="#">sobre mi</a>
-              <a href="#">prensa / entrevistas</a>
-              <a href="#">exhibiciones</a>
-              <a href="#">contacto</a>
-              <a href="#">blog</a>
-            </nav>
 
-            <div class="sidebar-footer">
-              <h3>Entrelazada</h3>
-              <p>60 x 80 cm, grafito sobre papel, 2026</p>
-              <p class="sidebar-controls">
-                <a href="#">Prev</a>
-                <span>/</span>
-                <a href="#">Next</a>
-              </p>
-            </div>
-          </aside>
+        </aside>
 
-          <section class="content-stage" aria-label="Obra seleccionada">
-            <img src="./assets/images/homePageImage.jpg" alt="Obra destacada en color" />
-          </section>
-        </div>
-      </section>
-    </main>
-    <script src="./script.js"></script>
-  </body>
+        <section class="content-stage" aria-label="Obra seleccionada">
+          <img src="./assets/images/homePageImage.jpg" alt="Obra destacada en color" />
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="./script.js"></script>
+</body>
+
 </html>

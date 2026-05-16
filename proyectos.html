@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos — Victoria Ruiz Diaz</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="site-shell" data-state="content">
+    <div class="content-layer">
+      <div class="content-shell">
+
+        <aside class="content-sidebar" aria-label="Menu principal">
+          <div>
+            <a href="./index.html" class="inner-page-name">
+              <h2 class="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
+            </a>
+            <p class="sidebar-label">dibujo e ilustracion</p>
+          </div>
+
+          <nav class="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+            <a href="./trabajo.html">Trabajo</a>
+            <a href="./proyectos.html" class="nav-active">Proyectos</a>
+            <a href="./statement.html">Statement</a>
+            <a href="./bio.html">Bio</a>
+            <a href="./contacto.html">Contacto</a>
+          </nav>
+
+          <nav class="year-nav" aria-label="Proyectos">
+
+            <div class="year-item">
+              <button class="year-btn" type="button">El cuerpo y sus sombras</button>
+              <ul class="year-dropdown">
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0034.jpg"
+                    data-title="El cuerpo y sus sombras"
+                    data-meta="instalacion y dibujo · 2024"
+                    data-desc="Serie de grandes formatos que exploran la presencia del cuerpo a traves del dibujo directo sobre papel.">A — Vista general</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0035.jpg"
+                    data-title="El cuerpo y sus sombras — Detalle I"
+                    data-meta="instalacion y dibujo · 2024"
+                    data-desc="Cada pieza registra una sesion de observacion sostenida, dejando visible el proceso de correccion y el rastro del tiempo.">B — Detalle I</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0036.jpg"
+                    data-title="El cuerpo y sus sombras — Detalle II"
+                    data-meta="instalacion y dibujo · 2024"
+                    data-desc="La sombra como segunda piel: presente, pero siempre diferida.">C — Detalle II</a></li>
+              </ul>
+            </div>
+
+            <div class="year-item">
+              <button class="year-btn" type="button">Cuaderno de campo</button>
+              <ul class="year-dropdown">
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0037.jpg"
+                    data-title="Cuaderno de campo"
+                    data-meta="serie de ilustraciones · 2023"
+                    data-desc="Coleccion de dibujos realizados en espacios publicos y privados durante un periodo de seis meses.">A — Descripcion</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0038.jpg"
+                    data-title="Cuaderno de campo — Pagina I"
+                    data-meta="serie de ilustraciones · 2023"
+                    data-desc="El cuaderno funciona como diario visual: fragmentos, bocetos y observaciones que no aspiran a ser obra terminada.">B — Pagina I</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0039.jpg"
+                    data-title="Cuaderno de campo — Pagina II"
+                    data-meta="serie de ilustraciones · 2023"
+                    data-desc="Mirar como practica: el cuaderno como ejercicio cotidiano de atencion.">C — Pagina II</a></li>
+              </ul>
+            </div>
+
+            <div class="year-item">
+              <button class="year-btn" type="button">Linea continua</button>
+              <ul class="year-dropdown">
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0040.jpg"
+                    data-title="Linea continua"
+                    data-meta="obra en progreso · 2025"
+                    data-desc="Investigacion en curso sobre el trazo ininterrumpido como metodo de representacion.">A — Concepto</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0041.jpg"
+                    data-title="Linea continua — Proceso"
+                    data-meta="obra en progreso · 2025"
+                    data-desc="La mano nunca se levanta del papel, obligando a una lectura diferente del error y la correccion.">B — Proceso</a></li>
+                <li><a href="#"
+                    data-src="./assets/images/landingImage_page-0052.jpg"
+                    data-title="Linea continua — Estado actual"
+                    data-meta="obra en progreso · 2025"
+                    data-desc="Una serie de retratos donde la continuidad del trazo define tanto la forma como el tiempo del dibujo.">C — Estado actual</a></li>
+              </ul>
+            </div>
+
+          </nav>
+        </aside>
+
+        <section class="trabajo-stage" aria-label="Proyecto seleccionado">
+          <div class="artwork-display">
+            <img id="main-artwork"
+              src="./assets/images/landingImage_page-0033.jpg"
+              alt="Proyecto seleccionado" />
+            <div class="artwork-info">
+              <span class="artwork-title" id="artwork-title">Proyectos</span>
+              <span class="artwork-meta" id="artwork-meta">selecciona un proyecto</span>
+              <span class="artwork-desc" id="artwork-desc"></span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const mainImg = document.getElementById('main-artwork');
+    const titleEl = document.getElementById('artwork-title');
+    const metaEl  = document.getElementById('artwork-meta');
+    const descEl  = document.getElementById('artwork-desc');
+
+    document.querySelectorAll('.year-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.year-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.year-item.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    document.querySelectorAll('.year-dropdown a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        mainImg.src         = link.dataset.src;
+        titleEl.textContent = link.dataset.title;
+        metaEl.textContent  = link.dataset.meta;
+        descEl.textContent  = link.dataset.desc || '';
+        document.querySelectorAll('.year-dropdown a.sub-active')
+          .forEach(el => el.classList.remove('sub-active'));
+        link.classList.add('sub-active');
+      });
+    });
+  </script>
+
+</body>
+</html>
