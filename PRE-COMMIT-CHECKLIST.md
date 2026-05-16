@@ -1,36 +1,36 @@
 # Pre-Commit Checklist — Victoria Ruiz Diaz
 
 ## 1. Code Quality
-- [ ] No `console.log()` statements left in production code
-- [ ] No commented-out code blocks
-- [ ] Consistent indentation (2 spaces)
-- [ ] No trailing whitespace
+- [x] No `console.log()` statements left in production code
+- [x] No commented-out code blocks
+- [x] Consistent indentation (2 spaces)
+- [x] No trailing whitespace
 
 ## 2. Accessibility
-- [ ] All images have alt text
-- [ ] Color contrast meets WCAG AA standards
-- [ ] Keyboard navigation works
-- [ ] Semantic HTML used correctly
+- [x] All images have alt text
+- [x] Color contrast meets WCAG AA standards
+- [x] Keyboard navigation works
+- [x] Semantic HTML used correctly
 
 ## 3. Performance
-- [ ] Images are optimized (under 200KB each)
-- [ ] No render-blocking resources
+- [x] Images are optimized (under 200KB each)
+- [x] No render-blocking resources
 - [ ] CSS/JS are minified
-- [ ] No unused CSS classes
+- [x] No unused CSS classes
 
 ## 4. Spanish / Bilingual
-- [ ] Spanish text is correct and consistent
-- [ ] All UI strings are in Spanish (or bilingual toggle ready)
-- [ ] No hardcoded English strings
+- [x] Spanish text is correct and consistent
+- [x] All UI strings are in Spanish (or bilingual toggle ready)
+- [x] No hardcoded English strings
 
 ## 5. Responsive Design
-- [ ] Mobile (under 600px) ✓
-- [ ] Tablet (600–1024px) ✓
-- [ ] Desktop (1024px+) ✓
-- [ ] No horizontal scroll
+- [x] Mobile (under 600px) ✓
+- [x] Tablet (600–1024px) ✓
+- [x] Desktop (1024px+) ✓
+- [ ] No horizontal scroll — needs manual browser check
 
 ## 6. Git / Commit
-- [ ] Commit message is clear and descriptive
-- [ ] No `node_modules` or build artifacts committed
-- [ ] No API keys or secrets in code
-- [ ] Related changes are grouped in one commit
+- [x] Commit message is clear and descriptive
+- [x] No `node_modules` or build artifacts committed
+- [x] No API keys or secrets in code
+- [x] Related changes are grouped in one commit
