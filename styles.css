@@ -52,11 +52,6 @@ body {
 
 .title-band {
   width: min(100%, 560px);
-  background: rgba(244, 244, 241, 0.5);
-  border: 1px solid rgba(244, 244, 241, 0.72);
-  padding: 0.48rem 0.78rem;
-  backdrop-filter: blur(2px);
-  border-radius: 8px;
 }
 
 .title-band h1 {
@@ -77,13 +72,8 @@ body {
 }
 
 .enter-btn {
-  border: 1px solid rgba(244, 244, 241, 0.72);
-  background: linear-gradient(
-    to bottom,
-    rgba(244, 244, 241, 0.5),
-    rgba(244, 244, 241, 0.5)
-  );
-  backdrop-filter: blur(2px);
+  border: none;
+  background: none;
   color: #141414;
   padding: 0.7rem 1.8rem;
   text-transform: uppercase;
@@ -91,16 +81,6 @@ body {
   cursor: pointer;
   font-size: 0.72rem;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
-  border-radius: 8px;
-}
-
-.enter-btn:hover,
-.enter-btn:focus-visible {
-  background: linear-gradient(
-    to bottom,
-    rgba(244, 244, 241, 0.64),
-    rgba(244, 244, 241, 0.64)
-  );
 }
 
 .content-layer {
