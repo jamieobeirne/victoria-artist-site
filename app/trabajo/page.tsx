@@ -88,6 +88,7 @@ export default function TrabajoPage() {
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+              <Link href="/">Inicio</Link>
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button
                   className="nav-toggle nav-active"

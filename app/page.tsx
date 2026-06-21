@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 interface Artwork {
@@ -84,6 +83,17 @@ const PROYECTOS_ITEMS: { group: string; items: Artwork[] }[] = [
 
 export default function Home() {
   const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    if (sessionStorage.getItem('victoria-entered') === 'true') {
+      setEntered(true)
+    }
+  }, [])
+
+  function handleEnter() {
+    sessionStorage.setItem('victoria-entered', 'true')
+    setEntered(true)
+  }
   const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
   const [trabajoOpen, setTrabajoOpen] = useState(false)
   const [proyectosOpen, setProyectosOpen] = useState(false)
@@ -116,7 +126,7 @@ export default function Home() {
                 id="enter-btn"
                 className="enter-btn"
                 type="button"
-                onClick={() => setEntered(true)}
+                onClick={handleEnter}
               >
                 Entrar
               </button>
@@ -139,6 +149,7 @@ export default function Home() {
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+              <Link href="/">Inicio</Link>
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button
                   className="nav-toggle"
