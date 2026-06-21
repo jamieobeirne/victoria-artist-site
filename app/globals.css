@@ -396,7 +396,7 @@ body {
 .sub-nav {
   display: flex;
   flex-direction: column;
-  padding: 0.3rem 0 0.5rem 0;
+  padding: 0.3rem 0 0.5rem 10px;
 }
 
 .sub-nav a {

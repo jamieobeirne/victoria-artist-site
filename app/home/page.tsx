@@ -23,12 +23,15 @@ const TRABAJO_ITEMS: { group: string; items: Artwork[] }[] = [
   { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0051.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0031.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0032.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
 ]
 
-const PROYECTOS_LINKS = ['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum']
+const PROYECTOS_ITEMS: { group: string; items: Artwork[] }[] = [
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0034.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0035.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0036.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0037.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0038.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0039.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0040.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0041.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0052.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
+]
 
-
-export default function TrabajoPage() {
-  const [activeArtwork, setActiveArtwork] = useState<Artwork>(TRABAJO_ITEMS[0].items[0])
-  const [trabajoOpen, setTrabajoOpen] = useState(true)
+export default function HomePage() {
+  const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
+  const [trabajoOpen, setTrabajoOpen] = useState(false)
   const [proyectosOpen, setProyectosOpen] = useState(false)
 
   return (
@@ -46,11 +49,7 @@ export default function TrabajoPage() {
               <Link href="/home">Inicio</Link>
 
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
-                <button
-                  className="nav-toggle nav-active"
-                  type="button"
-                  onClick={() => setTrabajoOpen(o => !o)}
-                >
+                <button className="nav-toggle" type="button" onClick={() => setTrabajoOpen(o => !o)}>
                   Trabajo
                 </button>
                 <div className="nav-accordion-body">
@@ -60,7 +59,7 @@ export default function TrabajoPage() {
                         <a
                           key={i}
                           href="#"
-                          className={activeArtwork.src === group.items[0].src ? 'sub-active' : ''}
+                          className={activeArtwork?.src === group.items[0].src ? 'sub-active' : ''}
                           onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
                         >
                           {group.group}
@@ -72,18 +71,21 @@ export default function TrabajoPage() {
               </div>
 
               <div className={`nav-accordion-item${proyectosOpen ? ' open' : ''}`}>
-                <button
-                  className="nav-toggle"
-                  type="button"
-                  onClick={() => setProyectosOpen(o => !o)}
-                >
+                <button className="nav-toggle" type="button" onClick={() => setProyectosOpen(o => !o)}>
                   Proyectos
                 </button>
                 <div className="nav-accordion-body">
                   <div className="accordion-inner">
                     <nav className="sub-nav">
-                      {PROYECTOS_LINKS.map((label, i) => (
-                        <Link key={i} href="/proyectos">{label}</Link>
+                      {PROYECTOS_ITEMS.map((group, i) => (
+                        <a
+                          key={i}
+                          href="#"
+                          className={activeArtwork?.src === group.items[0].src ? 'sub-active' : ''}
+                          onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
+                        >
+                          {group.group}
+                        </a>
                       ))}
                     </nav>
                   </div>
@@ -98,13 +100,11 @@ export default function TrabajoPage() {
 
           <section className="trabajo-stage" aria-label="Obra seleccionada">
             <div className="artwork-display">
-              <img src={activeArtwork.src} alt="Obra seleccionada" />
+              <img src={activeArtwork?.src ?? '/images/homePageImage.jpg'} alt="Obra destacada" />
               <div className="artwork-info">
-                <span className="artwork-title">{activeArtwork.title}</span>
-                <span className="artwork-meta">{activeArtwork.meta}</span>
-                {activeArtwork.desc && (
-                  <span className="artwork-desc">{activeArtwork.desc}</span>
-                )}
+                <span className="artwork-title">{activeArtwork?.title ?? ''}</span>
+                <span className="artwork-meta">{activeArtwork?.meta ?? ''}</span>
+                {activeArtwork?.desc && <span className="artwork-desc">{activeArtwork.desc}</span>}
               </div>
             </div>
           </section>

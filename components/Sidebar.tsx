@@ -14,9 +14,6 @@ interface SidebarProps {
   activePage?: 'statement' | 'bio' | 'contacto' | 'trabajo' | 'proyectos'
 }
 
-function setEntered() {
-  sessionStorage.setItem('victoria-entered', 'true')
-}
 
 export default function Sidebar({ activePage }: SidebarProps) {
   const [trabajoOpen, setTrabajoOpen] = useState(false)
@@ -25,7 +22,7 @@ export default function Sidebar({ activePage }: SidebarProps) {
   return (
     <aside className="content-sidebar" aria-label="Menu principal">
       <div>
-        <Link href="/" className="inner-page-name" onClick={setEntered}>
+        <Link href="/home" className="inner-page-name">
           <h2 className="sidebar-name">
             Victoria<br />Ruiz<br />Diaz
           </h2>
@@ -33,7 +30,7 @@ export default function Sidebar({ activePage }: SidebarProps) {
       </div>
 
       <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-        <Link href="/" onClick={setEntered}>Inicio</Link>
+        <Link href="/home">Inicio</Link>
 
         <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
           <button
