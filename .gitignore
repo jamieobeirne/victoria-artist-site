@@ -1,5 +1,4 @@
 node_modules/
-compress-images.js
-package.json
-package-lock.json
+.next/
 .claude/
+next-env.d.ts
