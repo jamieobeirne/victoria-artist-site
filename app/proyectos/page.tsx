@@ -11,31 +11,21 @@ interface Artwork {
 }
 
 const PROYECTOS_ITEMS: { group: string; items: Artwork[] }[] = [
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0034.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0035.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0036.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0037.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0038.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0039.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0040.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0041.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { src: '/images/landingImage_page-0052.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  ]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0034.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0035.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0036.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0037.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0038.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0039.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0040.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0041.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, { src: '/images/landingImage_page-0052.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }]},
 ]
 
-const TRABAJO_GROUPS = Array(10).fill('Lorem ipsum')
+const TRABAJO_LINKS = Array(10).fill('Lorem ipsum')
+
+function setEntered() {
+  sessionStorage.setItem('victoria-entered', 'true')
+}
 
 export default function ProyectosPage() {
   const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
   const [trabajoOpen, setTrabajoOpen] = useState(false)
   const [proyectosOpen, setProyectosOpen] = useState(true)
-  const [openYearTrabajo, setOpenYearTrabajo] = useState<number | null>(null)
-  const [openYear, setOpenYear] = useState<number | null>(null)
 
   return (
     <main className="site-shell" data-state="content">
@@ -43,13 +33,14 @@ export default function ProyectosPage() {
         <div className="content-shell">
           <aside className="content-sidebar" aria-label="Menu principal">
             <div>
-              <Link href="/" className="inner-page-name">
+              <Link href="/" className="inner-page-name" onClick={setEntered}>
                 <h2 className="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
               </Link>
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-              <Link href="/">Inicio</Link>
+              <Link href="/" onClick={setEntered}>Inicio</Link>
+
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button
                   className="nav-toggle"
@@ -59,26 +50,13 @@ export default function ProyectosPage() {
                   Trabajo
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {TRABAJO_GROUPS.map((label, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYearTrabajo === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => setOpenYearTrabajo(openYearTrabajo === i ? null : i)}
-                        >
-                          {label}
-                        </button>
-                        {openYearTrabajo === i && (
-                          <ul className="year-dropdown">
-                            <li><Link href="/trabajo">A — Lorem ipsum</Link></li>
-                            <li><Link href="/trabajo">B — Lorem ipsum</Link></li>
-                            <li><Link href="/trabajo">C — Lorem ipsum</Link></li>
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {TRABAJO_LINKS.map((label, i) => (
+                        <Link key={i} href="/trabajo">{label}</Link>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 
@@ -91,34 +69,20 @@ export default function ProyectosPage() {
                   Proyectos
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {PROYECTOS_ITEMS.map((group, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYear === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => setOpenYear(openYear === i ? null : i)}
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {PROYECTOS_ITEMS.map((group, i) => (
+                        <a
+                          key={i}
+                          href="#"
+                          className={activeArtwork?.src === group.items[0].src ? 'sub-active' : ''}
+                          onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
                         >
                           {group.group}
-                        </button>
-                        {openYear === i && (
-                          <ul className="year-dropdown">
-                            {group.items.map((item, j) => (
-                              <li key={j}>
-                                <a
-                                  href="#"
-                                  className={activeArtwork?.src === item.src ? 'sub-active' : ''}
-                                  onClick={e => { e.preventDefault(); setActiveArtwork(item) }}
-                                >
-                                  {String.fromCharCode(65 + j)} — Lorem ipsum
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 

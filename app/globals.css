@@ -378,9 +378,44 @@ body {
   text-decoration-thickness: 1px;
 }
 
-.nav-accordion-body { display: none; }
-.nav-accordion-item.open .nav-accordion-body { display: block; }
-.nav-accordion-body .year-nav { margin-top: 0.3rem; }
+.nav-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.nav-accordion-body > .accordion-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.nav-accordion-item.open .nav-accordion-body {
+  grid-template-rows: 1fr;
+}
+
+.sub-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem 0 0.5rem 0;
+}
+
+.sub-nav a {
+  display: block;
+  font-size: 0.78rem;
+  color: #909090;
+  text-decoration: none;
+  padding: 0.18rem 0;
+  letter-spacing: 0.03em;
+}
+
+.sub-nav a:hover { color: #252525; }
+.sub-nav a.sub-active { color: #121212; font-weight: 500; }
+
+.sub-nav a:focus-visible {
+  outline: 1.5px solid #121212;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
 @media (min-width: 701px) and (max-width: 1024px) {
   .content-shell {

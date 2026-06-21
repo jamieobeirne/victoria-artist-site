@@ -11,70 +11,28 @@ interface Artwork {
 }
 
 const TRABAJO_ITEMS: { group: string; items: Artwork[] }[] = [
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0044.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0045.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0046.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0047.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0007.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0008.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0009.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0010.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0011.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0012.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0013.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0014.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0015.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0016.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0017.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0018.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0019.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0020.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0048.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0022.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0023.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0049.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0025.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0026.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0027.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0028.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0029.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
-  { group: 'Lorem ipsum', items: [
-    { src: '/images/landingImage_page-0051.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0031.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-    { src: '/images/landingImage_page-0032.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' },
-  ]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0044.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0045.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0046.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0047.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0007.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0008.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0009.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0010.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0011.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0012.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0013.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0014.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0015.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0016.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0017.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0018.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0019.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0020.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0048.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0022.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0023.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0049.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0025.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0026.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0027.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0028.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0029.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
+  { group: 'Lorem ipsum', items: [{ src: '/images/landingImage_page-0051.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0031.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }, { src: '/images/landingImage_page-0032.jpg', title: 'Lorem ipsum', meta: 'Lorem ipsum' }]},
 ]
 
-const PROYECTOS_GROUPS = ['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum']
+const PROYECTOS_LINKS = ['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum']
+
+function setEntered() {
+  sessionStorage.setItem('victoria-entered', 'true')
+}
 
 export default function TrabajoPage() {
-  const [activeArtwork, setActiveArtwork] = useState<Artwork>({
-    src: '/images/landingImage_page-0043.jpg',
-    title: 'Lorem ipsum',
-    meta: 'Lorem ipsum',
-  })
+  const [activeArtwork, setActiveArtwork] = useState<Artwork>(TRABAJO_ITEMS[0].items[0])
   const [trabajoOpen, setTrabajoOpen] = useState(true)
   const [proyectosOpen, setProyectosOpen] = useState(false)
-  const [openYear, setOpenYear] = useState<number | null>(null)
-  const [openYearProyectos, setOpenYearProyectos] = useState<number | null>(null)
 
   return (
     <main className="site-shell" data-state="content">
@@ -82,13 +40,14 @@ export default function TrabajoPage() {
         <div className="content-shell">
           <aside className="content-sidebar" aria-label="Menu principal">
             <div>
-              <Link href="/" className="inner-page-name">
+              <Link href="/" className="inner-page-name" onClick={setEntered}>
                 <h2 className="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
               </Link>
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-              <Link href="/">Inicio</Link>
+              <Link href="/" onClick={setEntered}>Inicio</Link>
+
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button
                   className="nav-toggle nav-active"
@@ -98,34 +57,20 @@ export default function TrabajoPage() {
                   Trabajo
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {TRABAJO_ITEMS.map((group, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYear === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => setOpenYear(openYear === i ? null : i)}
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {TRABAJO_ITEMS.map((group, i) => (
+                        <a
+                          key={i}
+                          href="#"
+                          className={activeArtwork.src === group.items[0].src ? 'sub-active' : ''}
+                          onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
                         >
                           {group.group}
-                        </button>
-                        {openYear === i && (
-                          <ul className="year-dropdown">
-                            {group.items.map((item, j) => (
-                              <li key={j}>
-                                <a
-                                  href="#"
-                                  className={activeArtwork.src === item.src ? 'sub-active' : ''}
-                                  onClick={e => { e.preventDefault(); setActiveArtwork(item) }}
-                                >
-                                  {String.fromCharCode(65 + j)} — Lorem ipsum
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 
@@ -138,26 +83,13 @@ export default function TrabajoPage() {
                   Proyectos
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {PROYECTOS_GROUPS.map((label, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYearProyectos === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => setOpenYearProyectos(openYearProyectos === i ? null : i)}
-                        >
-                          {label}
-                        </button>
-                        {openYearProyectos === i && (
-                          <ul className="year-dropdown">
-                            <li><Link href="/proyectos">A — Lorem ipsum</Link></li>
-                            <li><Link href="/proyectos">B — Lorem ipsum</Link></li>
-                            <li><Link href="/proyectos">C — Lorem ipsum</Link></li>
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {PROYECTOS_LINKS.map((label, i) => (
+                        <Link key={i} href="/proyectos">{label}</Link>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 

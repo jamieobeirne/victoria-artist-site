@@ -83,6 +83,9 @@ const PROYECTOS_ITEMS: { group: string; items: Artwork[] }[] = [
 
 export default function Home() {
   const [entered, setEntered] = useState(false)
+  const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
+  const [trabajoOpen, setTrabajoOpen] = useState(false)
+  const [proyectosOpen, setProyectosOpen] = useState(false)
 
   useEffect(() => {
     if (sessionStorage.getItem('victoria-entered') === 'true') {
@@ -93,19 +96,6 @@ export default function Home() {
   function handleEnter() {
     sessionStorage.setItem('victoria-entered', 'true')
     setEntered(true)
-  }
-  const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
-  const [trabajoOpen, setTrabajoOpen] = useState(false)
-  const [proyectosOpen, setProyectosOpen] = useState(false)
-  const [openYearTrabajo, setOpenYearTrabajo] = useState<number | null>(null)
-  const [openYearProyectos, setOpenYearProyectos] = useState<number | null>(null)
-
-  function toggleYear(
-    index: number,
-    openYear: number | null,
-    setOpenYear: (v: number | null) => void
-  ) {
-    setOpenYear(openYear === index ? null : index)
   }
 
   if (!entered) {
@@ -150,6 +140,7 @@ export default function Home() {
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
               <Link href="/">Inicio</Link>
+
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button
                   className="nav-toggle"
@@ -159,37 +150,20 @@ export default function Home() {
                   Trabajo
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {TRABAJO_ITEMS.map((group, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYearTrabajo === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => toggleYear(i, openYearTrabajo, setOpenYearTrabajo)}
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {TRABAJO_ITEMS.map((group, i) => (
+                        <a
+                          key={i}
+                          href="#"
+                          className={activeArtwork?.src === group.items[0].src ? 'sub-active' : ''}
+                          onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
                         >
                           {group.group}
-                        </button>
-                        {openYearTrabajo === i && (
-                          <ul className="year-dropdown">
-                            {group.items.map((item, j) => (
-                              <li key={j}>
-                                <a
-                                  href="#"
-                                  className={activeArtwork?.src === item.src ? 'sub-active' : ''}
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setActiveArtwork(item)
-                                  }}
-                                >
-                                  {String.fromCharCode(65 + j)} — Lorem ipsum
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 
@@ -202,37 +176,20 @@ export default function Home() {
                   Proyectos
                 </button>
                 <div className="nav-accordion-body">
-                  <nav className="year-nav">
-                    {PROYECTOS_ITEMS.map((group, i) => (
-                      <div key={i} className="year-item">
-                        <button
-                          className={`year-btn${openYearProyectos === i ? ' open' : ''}`}
-                          type="button"
-                          onClick={() => toggleYear(i, openYearProyectos, setOpenYearProyectos)}
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      {PROYECTOS_ITEMS.map((group, i) => (
+                        <a
+                          key={i}
+                          href="#"
+                          className={activeArtwork?.src === group.items[0].src ? 'sub-active' : ''}
+                          onClick={e => { e.preventDefault(); setActiveArtwork(group.items[0]) }}
                         >
                           {group.group}
-                        </button>
-                        {openYearProyectos === i && (
-                          <ul className="year-dropdown">
-                            {group.items.map((item, j) => (
-                              <li key={j}>
-                                <a
-                                  href="#"
-                                  className={activeArtwork?.src === item.src ? 'sub-active' : ''}
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setActiveArtwork(item)
-                                  }}
-                                >
-                                  {String.fromCharCode(65 + j)} — Lorem ipsum
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 
