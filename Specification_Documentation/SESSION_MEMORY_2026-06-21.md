@@ -44,8 +44,7 @@ Used Playwright to screenshot all 7 pages at 3 viewport sizes (desktop 1440, tab
 
 - **Platform:** Vercel (replacing GitHub Pages — GitHub Pages cannot run Next.js)
 - **CLI used:** `vercel --prod --yes`
-- **Live URL:** https://victoria-artist-site.vercel.app
-- **Alias also active:** https://victoria-artist-site-jamieobeirne123-7423s-projects.vercel.app
+- **Live URL:** https://victoriaruizdiaz.vercel.app
 - **Auto-deploy:** Every `git push` to `main` triggers a new production deploy automatically
 - **Account:** jamieobeirne123-7423s-projects on vercel.com
 - **GitHub repo connected:** https://github.com/jamieobeirne/victoria-artist-site
