@@ -40,13 +40,13 @@ export default function HomePage() {
         <div className="content-shell">
           <aside className="content-sidebar" aria-label="Menu principal">
             <div>
-              <Link href="/home" className="inner-page-name">
+              <Link href="/home" className="inner-page-name" onClick={() => setActiveArtwork(null)}>
                 <h2 className="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
               </Link>
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-              <Link href="/home">Inicio</Link>
+              <Link href="/home" onClick={() => setActiveArtwork(null)}>Inicio</Link>
 
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button className="nav-toggle" type="button" onClick={() => setTrabajoOpen(o => !o)}>
