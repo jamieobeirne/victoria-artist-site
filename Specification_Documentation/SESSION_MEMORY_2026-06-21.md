@@ -87,7 +87,34 @@ app/globals.css      — All site CSS (Tailwind v4 + custom)
 ## Open / Next Steps
 
 - [ ] Replace Lorem ipsum content with real artwork data (titles, dates, media, images)
-- [ ] Set up Vercel Blob for image storage
-- [ ] Set up Clerk for admin authentication
-- [ ] Build `/admin` upload page so Victoria can upload images herself
 - [ ] Optionally set a custom domain (e.g. victoriaruizdiaz.com.ar) in Vercel → Settings → Domains
+
+---
+
+## Admin Panel Roadmap
+
+### Phase 1 — Authentication (Clerk) ~2–3 hrs
+- Install Clerk, create account at clerk.com (free)
+- Protect the `/admin` route so only Victoria can access it
+- She gets a login page with email + password (or Google)
+
+### Phase 2 — Image Storage (Vercel Blob) ~1–2 hrs
+- Enable Vercel Blob in the Vercel dashboard (free tier available)
+- Add upload endpoint at `app/api/upload/route.ts`
+- Images stored in the cloud, each returning a permanent public URL
+
+### Phase 3 — Admin UI (`/admin` page) ~4–6 hrs
+- Private page Victoria logs into
+- Upload form: pick image file, add title / date / medium / series
+- On submit: uploads to Vercel Blob, saves metadata to database
+- View existing works, delete or reorder them
+
+### Phase 4 — Wire front end to real data ~2–3 hrs
+- Replace all Lorem ipsum placeholders with live content from the database
+- Sidebar nav, artwork viewer, and proyectos pages update dynamically
+
+### Prerequisites before starting
+- **Database** for image metadata (URL, title, date, medium, series) — recommended: Neon Postgres via Vercel Marketplace (free tier)
+- **Clerk account** — free for small projects
+
+### Estimated total: 10–15 hours across all 4 phases
