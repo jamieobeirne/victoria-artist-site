@@ -58,6 +58,8 @@ Used Playwright to screenshot all 7 pages at 3 viewport sizes (desktop 1440, tab
 | `0ab1b12` | Fix nav links on Trabajo & Proyectos — use shared Sidebar via InnerLayout |
 | `d880f01` | Reset artwork state when Inicio/name clicked while already on /home |
 | `9c14734` | Responsive polish: remove dev badge, sticky sidebar, mobile artwork cap |
+| `5b35a7a` | Replace Next.js favicon with V initial icon via next/og |
+| `68bf82a` | Remove Next.js icon from browser tab — empty SVG favicon, no icon shown |
 
 ---
 
