@@ -6,6 +6,7 @@ A contemplative, minimalist portfolio site for a visual artist. The interface st
 
 **Current live site:** https://jamieobeirne.github.io/victoria-artist-site/
 **Repository:** https://github.com/jamieobeirne/victoria-artist-site
+**Site map (Figma):** https://www.figma.com/board/aAoCotK6SN5YFbRIpO4mgL/Portafolio-de-Victoria-Ruiz-D%C3%ADaz?node-id=0-1&t=AmrobUi5eHNN2RwG-0
 
 ---
 
