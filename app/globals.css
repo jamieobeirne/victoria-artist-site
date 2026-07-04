@@ -86,7 +86,7 @@ body {
 
 .content-shell {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: minmax(max-content, 300px) 1fr;
   gap: clamp(20px, 4vw, 54px);
   align-items: start;
 }
@@ -101,8 +101,9 @@ body {
 
 .sidebar-name {
   margin: 0;
-  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-  line-height: 0.9;
+  font-size: clamp(1rem, 1.6vw, 1.55rem);
+  white-space: nowrap;
+  line-height: 1.1;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-weight: 600;
@@ -419,10 +420,10 @@ body {
 
 @media (min-width: 701px) and (max-width: 1024px) {
   .content-shell {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: minmax(max-content, 220px) 1fr;
     gap: 28px;
   }
-  .sidebar-name { font-size: 1.7rem; }
+  .sidebar-name { font-size: 1.1rem; }
   .artwork-display img { max-height: calc(100vh - 80px); }
 }
 
@@ -441,6 +442,7 @@ body {
     align-self: flex-start;
     margin-top: 0;
     margin-left: 0;
+    padding-left: 0;
   }
 
   .content-layer { padding: 14px; }
@@ -454,7 +456,7 @@ body {
     position: static;
   }
 
-  .sidebar-name { font-size: 1.9rem; }
+  .sidebar-name { font-size: 1.4rem; }
 
   .sidebar-nav {
     margin-top: 1rem;
@@ -468,4 +470,18 @@ body {
   }
 
   .content-stage img { max-height: none; }
+}
+
+@media (orientation: portrait) {
+  .gateway-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .enter-btn {
+    align-self: flex-start;
+    padding-left: 0;
+    margin-left: 0;
+  }
 }

@@ -33,6 +33,7 @@ export default function HomePage() {
   const [activeArtwork, setActiveArtwork] = useState<Artwork | null>(null)
   const [trabajoOpen, setTrabajoOpen] = useState(false)
   const [proyectosOpen, setProyectosOpen] = useState(false)
+  const [cvOpen, setCvOpen] = useState(false)
 
   return (
     <main className="site-shell" data-state="content">
@@ -41,7 +42,7 @@ export default function HomePage() {
           <aside className="content-sidebar" aria-label="Menu principal">
             <div>
               <Link href="/home" className="inner-page-name" onClick={() => setActiveArtwork(null)}>
-                <h2 className="sidebar-name">Victoria<br />Ruiz<br />Diaz</h2>
+                <h2 className="sidebar-name">Victoria Ruiz Diaz</h2>
               </Link>
             </div>
 
@@ -93,14 +94,28 @@ export default function HomePage() {
               </div>
 
               <Link href="/statement">Statement</Link>
-              <Link href="/bio">Bio</Link>
+
+              <div className={`nav-accordion-item${cvOpen ? ' open' : ''}`}>
+                <button className="nav-toggle" type="button" onClick={() => setCvOpen(o => !o)}>
+                  CV
+                </button>
+                <div className="nav-accordion-body">
+                  <div className="accordion-inner">
+                    <nav className="sub-nav">
+                      <Link href="/bio">Bio</Link>
+                      <Link href="/bio">CV extendido</Link>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+
               <Link href="/contacto">Contacto</Link>
             </nav>
           </aside>
 
           <section className="trabajo-stage" aria-label="Obra seleccionada">
             <div className="artwork-display">
-              <img src={activeArtwork?.src ?? '/images/homePageImage.jpg'} alt="Obra destacada" />
+              <img src={activeArtwork?.src ?? '/images/home.jpg'} alt="Obra destacada" />
               <div className="artwork-info">
                 <span className="artwork-title">{activeArtwork?.title ?? ''}</span>
                 <span className="artwork-meta">{activeArtwork?.meta ?? ''}</span>

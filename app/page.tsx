@@ -4,11 +4,15 @@ export default function GatewayPage() {
   return (
     <main className="site-shell" data-state="gateway">
       <section className="gateway" aria-labelledby="gateway-title">
-        <img
-          className="gateway-image"
-          src="/images/landingImage_page-0033.jpg"
-          alt="Pencil drawing used as the landing gateway artwork"
-        />
+        <picture>
+          <source media="(orientation: portrait)" srcSet="/images/portrait.jpg" />
+          <source media="(orientation: landscape)" srcSet="/images/landscape.jpg" />
+          <img
+            className="gateway-image"
+            src="/images/landscape.jpg"
+            alt="Intro artwork"
+          />
+        </picture>
         <div className="gateway-overlay">
           <div className="gateway-topbar">
             <div className="title-band">

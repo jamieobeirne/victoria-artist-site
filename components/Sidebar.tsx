@@ -18,14 +18,13 @@ interface SidebarProps {
 export default function Sidebar({ activePage }: SidebarProps) {
   const [trabajoOpen, setTrabajoOpen] = useState(false)
   const [proyectosOpen, setProyectosOpen] = useState(false)
+  const [cvOpen, setCvOpen] = useState(false)
 
   return (
     <aside className="content-sidebar" aria-label="Menu principal">
       <div>
         <Link href="/home" className="inner-page-name">
-          <h2 className="sidebar-name">
-            Victoria<br />Ruiz<br />Diaz
-          </h2>
+          <h2 className="sidebar-name">Victoria Ruiz Diaz</h2>
         </Link>
       </div>
 
@@ -73,9 +72,25 @@ export default function Sidebar({ activePage }: SidebarProps) {
         <Link href="/statement" className={activePage === 'statement' ? 'nav-active' : ''}>
           Statement
         </Link>
-        <Link href="/bio" className={activePage === 'bio' ? 'nav-active' : ''}>
-          Bio
-        </Link>
+
+        <div className={`nav-accordion-item${cvOpen ? ' open' : ''}`}>
+          <button
+            className={`nav-toggle${activePage === 'bio' ? ' nav-active' : ''}`}
+            type="button"
+            onClick={() => setCvOpen(o => !o)}
+          >
+            CV
+          </button>
+          <div className="nav-accordion-body">
+            <div className="accordion-inner">
+              <nav className="sub-nav">
+                <Link href="/bio">Bio</Link>
+                <Link href="/bio">CV extendido</Link>
+              </nav>
+            </div>
+          </div>
+        </div>
+
         <Link href="/contacto" className={activePage === 'contacto' ? 'nav-active' : ''}>
           Contacto
         </Link>
