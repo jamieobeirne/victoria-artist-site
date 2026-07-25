@@ -140,8 +140,25 @@ body {
   text-decoration-thickness: 1px;
 }
 
+.sidebar-social {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(0.9rem + 10px);
+}
+
+.social-icon {
+  color: #505050;
+  display: inline-flex;
+}
+
+.social-icon:hover {
+  color: #121212;
+}
+
 .sidebar-nav a:focus-visible,
-.sidebar-secondary a:focus-visible {
+.sidebar-secondary a:focus-visible,
+.social-icon:focus-visible {
   outline: 1.5px solid #121212;
   outline-offset: 3px;
   border-radius: 2px;

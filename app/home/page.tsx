@@ -47,7 +47,7 @@ export default function HomePage() {
             </div>
 
             <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
-              <Link href="/home" onClick={() => setActiveArtwork(null)}>Inicio</Link>
+              <Link href="/home" className="nav-active" onClick={() => setActiveArtwork(null)}>Inicio</Link>
 
               <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
                 <button className="nav-toggle" type="button" onClick={() => setTrabajoOpen(o => !o)}>
@@ -103,13 +103,29 @@ export default function HomePage() {
                   <div className="accordion-inner">
                     <nav className="sub-nav">
                       <Link href="/bio">Bio</Link>
-                      <Link href="/bio">CV extendido</Link>
+                      <Link href="/cv">CV extendido</Link>
                     </nav>
                   </div>
                 </div>
               </div>
 
               <Link href="/contacto">Contacto</Link>
+
+              <div className="sidebar-social" aria-label="Redes sociales">
+                <a href="mailto:victoria@victoriaruizdiaz.com" aria-label="Email" className="social-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 6l10 7 10-7" />
+                  </svg>
+                </a>
+                <a href="#" aria-label="Instagram" className="social-icon" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                </a>
+              </div>
             </nav>
           </aside>
 
