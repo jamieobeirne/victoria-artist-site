@@ -76,6 +76,7 @@ body {
   cursor: pointer;
   font-size: 0.72rem;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+  margin-top: -3px;
 }
 
 .content-layer {
@@ -433,14 +434,14 @@ body {
   .gateway-topbar {
     align-items: flex-start;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
   }
 
   .title-band { width: 100%; }
 
   .enter-btn {
     align-self: flex-start;
-    margin-top: 0;
+    margin-top: -3px;
     margin-left: 0;
     padding-left: 0;
   }
@@ -472,11 +473,11 @@ body {
   .content-stage img { max-height: none; }
 }
 
-@media (orientation: portrait) {
+@media (max-width: 700px) and (orientation: portrait) {
   .gateway-topbar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 30px;
+    gap: 15px;
   }
 
   .enter-btn {
