@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { requireAdminSession } from '@/lib/requireAdmin'
 import { categorySchema } from '@/lib/schema'
-import { readManifest, writeManifest } from '@/lib/manifest'
+import { readManifestForUpdate, writeManifest, ManifestConflictError } from '@/lib/manifest'
 import { deleteImage } from '@/lib/entries'
+import { deleteObject, keyFromPublicUrl } from '@/lib/r2'
 
 type RouteParams = { params: Promise<{ category: string; id: string; imageId: string }> }
 
@@ -18,12 +19,29 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     return NextResponse.json({ error: 'Invalid category' }, { status: 400 })
   }
 
-  const manifest = await readManifest()
+  const { manifest, etag } = await readManifestForUpdate()
+  let next
+  let removedImage
   try {
-    const next = deleteImage(manifest, categoryResult.data, id, imageId)
-    await writeManifest(next)
-    return NextResponse.json({ ok: true })
+    ;({ manifest: next, removedImage } = deleteImage(manifest, categoryResult.data, id, imageId))
   } catch (err) {
     return NextResponse.json({ error: (err as Error).message }, { status: 400 })
   }
+
+  try {
+    await writeManifest(next, etag)
+  } catch (err) {
+    if (err instanceof ManifestConflictError) {
+      return NextResponse.json({ error: err.message }, { status: 409 })
+    }
+    throw err
+  }
+
+  try {
+    await deleteObject(keyFromPublicUrl(removedImage.url))
+  } catch (err) {
+    console.error(`Failed to delete orphaned R2 object for image "${removedImage.id}":`, err)
+  }
+
+  return NextResponse.json({ ok: true })
 }

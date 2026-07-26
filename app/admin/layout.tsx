@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation'
 import { auth, signOut } from '@/lib/auth'
+import { isEmailAllowlisted } from '@/lib/allowlist'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
-  if (!session?.user) redirect('/signin')
+  if (!session?.user || !isEmailAllowlisted(session.user.email)) redirect('/signin')
 
   return (
     <div className="admin-shell">

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { requireAdminSession } from '@/lib/requireAdmin'
 import { createEntryRequestSchema } from '@/lib/schema'
-import { readManifest, writeManifest } from '@/lib/manifest'
+import { readManifestForUpdate, writeManifest, ManifestConflictError } from '@/lib/manifest'
 import { createEntry } from '@/lib/entries'
 
 export async function POST(req: NextRequest) {
@@ -16,9 +16,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.message }, { status: 400 })
   }
 
-  const manifest = await readManifest()
+  const { manifest, etag } = await readManifestForUpdate()
   const { manifest: next, entry } = createEntry(manifest, parsed.data)
-  await writeManifest(next)
+
+  try {
+    await writeManifest(next, etag)
+  } catch (err) {
+    if (err instanceof ManifestConflictError) {
+      return NextResponse.json({ error: err.message }, { status: 409 })
+    }
+    throw err
+  }
 
   return NextResponse.json({ entry }, { status: 201 })
 }

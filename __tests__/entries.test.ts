@@ -81,9 +81,15 @@ describe('updateEntry', () => {
 describe('deleteEntry', () => {
   it('removes the entry from the manifest array', () => {
     const manifest = baseManifest()
-    const next = deleteEntry(manifest, 'trabajo', 'e1')
+    const { manifest: next } = deleteEntry(manifest, 'trabajo', 'e1')
     expect(next.trabajo).toHaveLength(0)
     expect(next.proyectos).toEqual(manifest.proyectos)
+  })
+
+  it('returns the removed entry images so callers can clean them up in R2', () => {
+    const manifest = baseManifest()
+    const { removedImages } = deleteEntry(manifest, 'trabajo', 'e1')
+    expect(removedImages.map(i => i.id)).toEqual(['i1', 'i2', 'i3'])
   })
 
   it('throws when the entry does not exist', () => {
@@ -95,9 +101,15 @@ describe('deleteEntry', () => {
 describe('deleteImage', () => {
   it('removes one image from a multi-image entry, keeps the rest in order', () => {
     const manifest = baseManifest()
-    const next = deleteImage(manifest, 'trabajo', 'e1', 'i2')
+    const { manifest: next } = deleteImage(manifest, 'trabajo', 'e1', 'i2')
     const entry = next.trabajo.find(e => e.id === 'e1')!
     expect(entry.images.map(i => i.id)).toEqual(['i1', 'i3'])
+  })
+
+  it('returns the removed image so callers can clean it up in R2', () => {
+    const manifest = baseManifest()
+    const { removedImage } = deleteImage(manifest, 'trabajo', 'e1', 'i2')
+    expect(removedImage.id).toBe('i2')
   })
 
   it('blocks deleting the last remaining image of an entry', () => {

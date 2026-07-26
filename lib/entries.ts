@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import type { Manifest, Entry, Category, CreateEntryRequest } from './schema'
+import type { Manifest, Entry, Category, CreateEntryRequest, ImageItem } from './schema'
 
 export function createEntry(manifest: Manifest, req: CreateEntryRequest): { manifest: Manifest; entry: Entry } {
   const now = new Date().toISOString()
@@ -34,14 +34,25 @@ export function updateEntry(
   return { ...manifest, [category]: nextList }
 }
 
-export function deleteEntry(manifest: Manifest, category: Category, id: string): Manifest {
+export function deleteEntry(
+  manifest: Manifest,
+  category: Category,
+  id: string
+): { manifest: Manifest; removedImages: ImageItem[] } {
   const list = manifest[category]
+  const entry = list.find(e => e.id === id)
+  if (!entry) throw new Error(`Entry "${id}" not found in "${category}"`)
+
   const nextList = list.filter(e => e.id !== id)
-  if (nextList.length === list.length) throw new Error(`Entry "${id}" not found in "${category}"`)
-  return { ...manifest, [category]: nextList }
+  return { manifest: { ...manifest, [category]: nextList }, removedImages: entry.images }
 }
 
-export function deleteImage(manifest: Manifest, category: Category, entryId: string, imageId: string): Manifest {
+export function deleteImage(
+  manifest: Manifest,
+  category: Category,
+  entryId: string,
+  imageId: string
+): { manifest: Manifest; removedImage: ImageItem } {
   const list = manifest[category]
   const idx = list.findIndex(e => e.id === entryId)
   if (idx === -1) throw new Error(`Entry "${entryId}" not found in "${category}"`)
@@ -51,13 +62,14 @@ export function deleteImage(manifest: Manifest, category: Category, entryId: str
     throw new Error('Cannot delete the last image of an entry — delete the entry instead')
   }
 
-  const nextImages = entry.images.filter(img => img.id !== imageId)
-  if (nextImages.length === entry.images.length) {
+  const removedImage = entry.images.find(img => img.id === imageId)
+  if (!removedImage) {
     throw new Error(`Image "${imageId}" not found on entry "${entryId}"`)
   }
 
+  const nextImages = entry.images.filter(img => img.id !== imageId)
   const updated: Entry = { ...entry, images: nextImages, updatedAt: new Date().toISOString() }
   const nextList = [...list]
   nextList[idx] = updated
-  return { ...manifest, [category]: nextList }
+  return { manifest: { ...manifest, [category]: nextList }, removedImage }
 }

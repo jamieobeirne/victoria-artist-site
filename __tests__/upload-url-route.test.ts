@@ -12,7 +12,17 @@ function makeRequest(body: unknown): NextRequest {
 }
 
 describe('POST /api/admin/upload-url', () => {
-  beforeEach(() => jest.clearAllMocks())
+  const ORIGINAL_ADMIN_EMAILS = process.env.ADMIN_EMAILS
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+    process.env.ADMIN_EMAILS = 'victoriard6@gmail.com'
+  })
+
+  afterAll(() => {
+    if (ORIGINAL_ADMIN_EMAILS === undefined) delete process.env.ADMIN_EMAILS
+    else process.env.ADMIN_EMAILS = ORIGINAL_ADMIN_EMAILS
+  })
 
   it('returns 401 when there is no session', async () => {
     ;(authModule.auth as jest.Mock).mockResolvedValue(null)

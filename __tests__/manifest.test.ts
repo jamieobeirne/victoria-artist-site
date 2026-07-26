@@ -1,5 +1,5 @@
 /** @jest-environment node */
-import { readManifest, writeManifest } from '@/lib/manifest'
+import { readManifest, readManifestForUpdate, writeManifest, ManifestConflictError } from '@/lib/manifest'
 import * as r2 from '@/lib/r2'
 
 jest.mock('@/lib/r2')
@@ -88,5 +88,32 @@ describe('writeManifest', () => {
     const written = JSON.parse(body as string)
     expect(written.trabajo).toEqual(validManifest.trabajo)
     expect(written.proyectos).toEqual(next.proyectos)
+  })
+
+  it('passes the expected etag through to the R2 put as a conditional write', async () => {
+    await writeManifest(validManifest, 'etag-123')
+    const [, , , ifMatch] = (r2.putObject as jest.Mock).mock.calls[0]
+    expect(ifMatch).toBe('etag-123')
+  })
+
+  it('surfaces a ManifestConflictError when the conditional write is rejected (precondition failed)', async () => {
+    ;(r2.putObject as jest.Mock).mockRejectedValue({ name: 'PreconditionFailed' })
+    await expect(writeManifest(validManifest, 'stale-etag')).rejects.toThrow(ManifestConflictError)
+  })
+})
+
+describe('readManifestForUpdate', () => {
+  beforeEach(() => jest.clearAllMocks())
+
+  it('returns the parsed manifest along with the object etag', async () => {
+    ;(r2.getObjectWithMeta as jest.Mock).mockResolvedValue({ body: JSON.stringify(validManifest), etag: 'etag-abc' })
+    const result = await readManifestForUpdate()
+    expect(result.manifest).toEqual(validManifest)
+    expect(result.etag).toBe('etag-abc')
+  })
+
+  it('throws on corrupted JSON rather than returning a default/empty manifest', async () => {
+    ;(r2.getObjectWithMeta as jest.Mock).mockResolvedValue({ body: '{ not valid json', etag: 'etag-abc' })
+    await expect(readManifestForUpdate()).rejects.toThrow()
   })
 })
