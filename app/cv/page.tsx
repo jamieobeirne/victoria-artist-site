@@ -31,10 +31,6 @@ export default function CvPage() {
                 2022 &mdash; <em>Ut enim ad minim veniam</em>, quis nostrud exercitation
               </td>
             </tr>
-            <tr>
-              <td>contacto</td>
-              <td>lorem@ipsum.com</td>
-            </tr>
           </tbody>
         </table>
       </section>
