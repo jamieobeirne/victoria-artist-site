@@ -109,10 +109,8 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <Link href="/contacto">Contacto</Link>
-
               <div className="sidebar-social" aria-label="Redes sociales">
-                <a href="mailto:victoria@victoriaruizdiaz.com" aria-label="Email" className="social-icon">
+                <a href="mailto:victoriard6@gmail.com" aria-label="Email" className="social-icon">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="M2 6l10 7 10-7" />

@@ -203,6 +203,14 @@ body {
   margin-bottom: 0;
 }
 
+.inner-body p.statement-lead {
+  font-size: 1.18rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: #1a1a1a;
+  margin-bottom: 1.9rem;
+}
+
 .bio-table {
   border-collapse: collapse;
   width: 100%;

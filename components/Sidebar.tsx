@@ -11,7 +11,7 @@ const TRABAJO_LINKS = [
 const PROYECTOS_LINKS = ['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum']
 
 interface SidebarProps {
-  activePage?: 'statement' | 'bio' | 'cv' | 'contacto' | 'trabajo' | 'proyectos'
+  activePage?: 'statement' | 'bio' | 'cv' | 'trabajo' | 'proyectos'
 }
 
 
@@ -91,12 +91,8 @@ export default function Sidebar({ activePage }: SidebarProps) {
           </div>
         </div>
 
-        <Link href="/contacto" className={activePage === 'contacto' ? 'nav-active' : ''}>
-          Contacto
-        </Link>
-
         <div className="sidebar-social" aria-label="Redes sociales">
-          <a href="mailto:victoria@victoriaruizdiaz.com" aria-label="Email" className="social-icon">
+          <a href="mailto:victoriard6@gmail.com" aria-label="Email" className="social-icon">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="2" y="4" width="20" height="16" rx="2" />
               <path d="M2 6l10 7 10-7" />
