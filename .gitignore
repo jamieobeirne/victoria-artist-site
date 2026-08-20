@@ -4,3 +4,6 @@ node_modules/
 next-env.d.ts
 
 .vercel
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
