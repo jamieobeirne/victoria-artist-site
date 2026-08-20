@@ -10,9 +10,8 @@ export default function StatementPage() {
           <h3 className="inner-heading">Statement</h3>
         </header>
         <div className="inner-body">
-          <p className="statement-lead">Dibujo para estar</p>
           <p>
-            El dibujo es, para mí, una práctica de atención. Un lugar donde el tiempo deja de
+            Dibujo para estar. El dibujo es, para mí, una práctica de atención. Un lugar donde el tiempo deja de
             responder a la urgencia y la mirada encuentra la posibilidad de detenerse, permanecer y
             abrirse a otras formas de relación con lo visible.
           </p>

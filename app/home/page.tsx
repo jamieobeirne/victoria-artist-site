@@ -116,7 +116,7 @@ export default function HomePage() {
                     <path d="M2 6l10 7 10-7" />
                   </svg>
                 </a>
-                <a href="#" aria-label="Instagram" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/victoria_r_d_" aria-label="Instagram" className="social-icon" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="2" y="2" width="20" height="20" rx="5" />
                     <circle cx="12" cy="12" r="5" />
