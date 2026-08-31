@@ -35,6 +35,20 @@ describe('readManifest', () => {
     ;(r2.getObject as jest.Mock).mockResolvedValue(JSON.stringify({ trabajo: 'not-an-array', proyectos: [] }))
     await expect(readManifest()).rejects.toThrow()
   })
+
+  it('returns an empty manifest when manifest.json does not exist yet (fresh bucket)', async () => {
+    ;(r2.getObject as jest.Mock).mockRejectedValue({ name: 'NoSuchKey' })
+    await expect(readManifest()).resolves.toEqual({ trabajo: [], proyectos: [] })
+  })
+
+  it('propagates non-404 R2 failures instead of masking them as an empty manifest', async () => {
+    const denied = Object.assign(new Error('Access Denied'), {
+      name: 'AccessDenied',
+      $metadata: { httpStatusCode: 403 },
+    })
+    ;(r2.getObject as jest.Mock).mockRejectedValue(denied)
+    await expect(readManifest()).rejects.toThrow('Access Denied')
+  })
 })
 
 describe('writeManifest', () => {
@@ -115,5 +129,12 @@ describe('readManifestForUpdate', () => {
   it('throws on corrupted JSON rather than returning a default/empty manifest', async () => {
     ;(r2.getObjectWithMeta as jest.Mock).mockResolvedValue({ body: '{ not valid json', etag: 'etag-abc' })
     await expect(readManifestForUpdate()).rejects.toThrow()
+  })
+
+  it('returns an empty manifest and no etag when manifest.json does not exist yet', async () => {
+    ;(r2.getObjectWithMeta as jest.Mock).mockRejectedValue({ $metadata: { httpStatusCode: 404 } })
+    const result = await readManifestForUpdate()
+    expect(result.manifest).toEqual({ trabajo: [], proyectos: [] })
+    expect(result.etag).toBeUndefined()
   })
 })

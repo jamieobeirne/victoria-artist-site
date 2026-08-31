@@ -3,21 +3,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-const TRABAJO_LINKS = [
-  'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum',
-  'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum',
-]
-
-const PROYECTOS_LINKS = ['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum']
-
 interface SidebarProps {
   activePage?: 'statement' | 'bio' | 'cv' | 'contacto' | 'trabajo' | 'proyectos'
 }
 
 
 export default function Sidebar({ activePage }: SidebarProps) {
-  const [trabajoOpen, setTrabajoOpen] = useState(activePage === 'trabajo')
-  const [proyectosOpen, setProyectosOpen] = useState(activePage === 'proyectos')
   const [cvOpen, setCvOpen] = useState(activePage === 'bio' || activePage === 'cv')
 
   return (
@@ -31,43 +22,13 @@ export default function Sidebar({ activePage }: SidebarProps) {
       <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
         <Link href="/home">Inicio</Link>
 
-        <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
-          <button
-            className={`nav-toggle${activePage === 'trabajo' ? ' nav-active' : ''}`}
-            type="button"
-            onClick={() => setTrabajoOpen(o => !o)}
-          >
-            Trabajo
-          </button>
-          <div className="nav-accordion-body">
-            <div className="accordion-inner">
-              <nav className="sub-nav">
-                {TRABAJO_LINKS.map((label, i) => (
-                  <Link key={i} href="/trabajo">{label}</Link>
-                ))}
-              </nav>
-            </div>
-          </div>
-        </div>
+        <Link href="/trabajo" className={activePage === 'trabajo' ? 'nav-active' : ''}>
+          Trabajo
+        </Link>
 
-        <div className={`nav-accordion-item${proyectosOpen ? ' open' : ''}`}>
-          <button
-            className={`nav-toggle${activePage === 'proyectos' ? ' nav-active' : ''}`}
-            type="button"
-            onClick={() => setProyectosOpen(o => !o)}
-          >
-            Proyectos
-          </button>
-          <div className="nav-accordion-body">
-            <div className="accordion-inner">
-              <nav className="sub-nav">
-                {PROYECTOS_LINKS.map((label, i) => (
-                  <Link key={i} href="/proyectos">{label}</Link>
-                ))}
-              </nav>
-            </div>
-          </div>
-        </div>
+        <Link href="/proyectos" className={activePage === 'proyectos' ? 'nav-active' : ''}>
+          Proyectos
+        </Link>
 
         <Link href="/statement" className={activePage === 'statement' ? 'nav-active' : ''}>
           Statement
