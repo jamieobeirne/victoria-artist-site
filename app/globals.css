@@ -227,6 +227,34 @@ body {
   padding-right: 1rem;
 }
 
+.cv-table {
+  max-width: 720px;
+}
+
+.cv-table td:first-child {
+  width: 24%;
+}
+
+@media (max-width: 640px) {
+  .cv-table,
+  .cv-table tbody,
+  .cv-table tr,
+  .cv-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .cv-table td:first-child {
+    width: 100%;
+    padding-bottom: 0.15rem;
+  }
+
+  .cv-table td:last-child {
+    padding-top: 0;
+    padding-bottom: 1.1rem;
+  }
+}
+
 .contact-form {
   max-width: 460px;
   display: flex;

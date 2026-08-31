@@ -5,10 +5,13 @@ next-env.d.ts
 
 .vercel
 
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
+
 .env
 .env.local
-.env.*.local
-tsconfig.tsbuildinfo
+.env*.local
+
 .dev-r2-store/
 *.bundle
 _to_delete/

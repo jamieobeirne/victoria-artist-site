@@ -1,6 +1,6 @@
 import Sidebar from './Sidebar'
 
-type ActivePage = 'statement' | 'bio' | 'cv' | 'contacto' | 'trabajo' | 'proyectos'
+type ActivePage = 'statement' | 'bio' | 'cv' | 'trabajo' | 'proyectos'
 
 interface InnerLayoutProps {
   activePage: ActivePage

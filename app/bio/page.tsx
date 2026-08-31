@@ -10,9 +10,14 @@ export default function BioPage() {
           <h3 className="inner-heading">Bio</h3>
         </header>
         <div className="inner-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit, sed quia non numquam eius modi tempora incidunt.</p>
+          <p>
+            Victoria Ruíz Díaz (1984, Argentina) es artista visual y tatuadora. Se formó en Artes
+            Visuales, Gestión Cultural y Diseño de la Comunicación Visual en Paraná y Santa Fe. Desde
+            2005 ha participado en exposiciones colectivas e individuales en diversas ciudades de
+            Argentina y el exterior, recibiendo premios, becas y participando en residencias artísticas
+            en Brasil, Miami y distintas provincias argentinas. Actualmente reside en Barcelona, donde
+            continúa desarrollando su obra artística y del tatuaje.
+          </p>
         </div>
       </section>
     </InnerLayout>
