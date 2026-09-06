@@ -61,10 +61,28 @@ export function NewEntryForm() {
     return { id: pending.id, url: publicUrl as string, caption: pending.caption }
   }
 
-  const titleOk = title.length > 0 && title.length <= 80
-  const descriptionOk = description.length > 0 && description.length <= 500
-  const captionsOk = images.length > 0 && images.every(img => img.caption.length > 0 && img.caption.length <= 150)
-  const canSubmit = category !== '' && titleOk && descriptionOk && captionsOk && !submitting
+  // Every reason the form cannot be saved, in the order the fields appear.
+  // Shown to the admin instead of silently disabling the button.
+  const problems: string[] = []
+  if (category === '') problems.push('Selecciona una categoría.')
+  if (title.length === 0) problems.push('El título es obligatorio.')
+  else if (title.length > 80) problems.push(`El título tiene ${title.length} caracteres; el máximo es 80.`)
+  if (description.length === 0) problems.push('La descripción es obligatoria.')
+  else if (description.length > 500)
+    problems.push(`La descripción tiene ${description.length} caracteres; el máximo es 500.`)
+  if (images.length === 0) problems.push('Añade al menos una imagen.')
+  else {
+    if (images.some(img => img.caption.length === 0))
+      problems.push('Cada imagen necesita una descripción breve.')
+    const longest = images.reduce((max, img) => Math.max(max, img.caption.length), 0)
+    if (longest > 150)
+      problems.push(`Una descripción de imagen tiene ${longest} caracteres; el máximo es 150.`)
+  }
+
+  // Don't scold someone who has only just opened the form.
+  const started = category !== '' || title.length > 0 || description.length > 0 || images.length > 0
+  const showProblems = started && problems.length > 0
+  const canSubmit = problems.length === 0 && !submitting
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -121,6 +139,7 @@ export function NewEntryForm() {
           value={title}
           onChange={e => setTitle(e.target.value)}
           maxLength={160}
+          aria-invalid={title.length > 80}
           required
         />
         <CharCounter value={title} max={80} />
@@ -134,6 +153,7 @@ export function NewEntryForm() {
           onChange={e => setDescription(e.target.value)}
           rows={4}
           maxLength={800}
+          aria-invalid={description.length > 500}
           required
         />
         <CharCounter value={description} max={500} />
@@ -163,6 +183,7 @@ export function NewEntryForm() {
                   value={img.caption}
                   onChange={e => updateCaption(img.id, e.target.value)}
                   maxLength={200}
+                  aria-invalid={img.caption.length > 150}
                 />
                 <CharCounter value={img.caption} max={150} />
               </div>
@@ -175,6 +196,17 @@ export function NewEntryForm() {
       )}
 
       {error && <p className="admin-error">{error}</p>}
+
+      {showProblems && (
+        <div className="form-problems" role="status" aria-live="polite">
+          <p className="form-problems-title">Para guardar, corrige lo siguiente:</p>
+          <ul>
+            {problems.map(problem => (
+              <li key={problem}>{problem}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <button type="submit" className="form-submit" disabled={!canSubmit}>
         {submitting ? 'Guardando…' : 'Guardar entrada'}
