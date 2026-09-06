@@ -2,6 +2,9 @@
 
 * { box-sizing: border-box; }
 
+/* Base type scale. 115% makes every rem-based size 15% larger at once. */
+html { font-size: 115%; }
+
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -731,14 +734,22 @@ body {
 /* --- Admin form validation feedback --- */
 
 .form-submit:disabled {
-  color: #a8a49d;
-  border-color: #e2e0db;
+  color: #b0aca4;
+  border-color: #e6e4df;
+  background: #f2f0ec;
   cursor: not-allowed;
+  opacity: 0.75;
 }
 
 .form-submit:disabled:hover {
-  background: none;
-  border-color: #e2e0db;
+  background: #f2f0ec;
+  border-color: #e6e4df;
+}
+
+.form-hint {
+  margin: 0;
+  color: #8a867f;
+  font-size: 0.8rem;
 }
 
 .form-problems {
@@ -768,4 +779,108 @@ body {
 .form-field input[aria-invalid='true'],
 .form-field textarea[aria-invalid='true'] {
   border-bottom-color: #8a2e2e;
+}
+
+
+/* --- Admin: navigation, actions, responsive --- */
+
+.required-star {
+  color: #8a2e2e;
+  font-weight: 600;
+}
+
+.admin-back {
+  align-self: flex-start;
+  font-size: 0.78rem;
+  color: #505050;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+
+.admin-back:hover {
+  color: #1d1d1c;
+  text-decoration: underline;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.form-submit-wrap {
+  display: inline-block;
+}
+
+/* Disabled buttons swallow their own clicks, so let the wrapper receive them. */
+.form-submit:disabled {
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .admin-header {
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .admin-main {
+    padding: 1rem;
+  }
+
+  .admin-dashboard {
+    gap: 1.1rem;
+  }
+
+  .admin-dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .admin-form {
+    max-width: 100%;
+  }
+
+  .admin-entry-list li {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-entry-meta {
+    margin-right: 0;
+    width: 100%;
+    order: 3;
+  }
+
+  .admin-image-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid #e8e8e4;
+  }
+
+  .admin-image-list .form-field {
+    width: 100%;
+  }
+
+  .admin-image-thumb {
+    width: 120px;
+    height: 120px;
+  }
+
+  .form-actions {
+    width: 100%;
+  }
+
+  .form-submit,
+  .form-submit-wrap {
+    width: 100%;
+  }
+
+  .form-submit {
+    text-align: center;
+  }
 }

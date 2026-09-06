@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { readManifest } from '@/lib/manifest'
 import { categorySchema } from '@/lib/schema'
@@ -22,6 +23,9 @@ export default async function EditEntryPage({
 
   return (
     <div className="admin-dashboard">
+      <Link href="/admin" className="admin-back">
+        ← Volver al panel
+      </Link>
       <h1>Editar entrada</h1>
 
       <EditEntryForm

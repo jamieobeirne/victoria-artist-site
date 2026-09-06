@@ -5,6 +5,17 @@ import { useRouter } from 'next/navigation'
 import type { Category } from '@/lib/schema'
 import { CharCounter } from './CharCounter'
 
+const TITLE_MAX = 80
+const DESCRIPTION_MAX = 500
+
+function Required() {
+  return (
+    <span className="required-star" aria-hidden="true">
+      *
+    </span>
+  )
+}
+
 export function EditEntryForm({
   category,
   id,
@@ -20,21 +31,16 @@ export function EditEntryForm({
   const [title, setTitle] = useState(initialTitle)
   const [description, setDescription] = useState(initialDescription)
   const [saving, setSaving] = useState(false)
+  const [attempted, setAttempted] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Every reason the form cannot be saved, shown instead of silently
-  // disabling the button.
-  const problems: string[] = []
-  if (title.length === 0) problems.push('El título es obligatorio.')
-  else if (title.length > 80) problems.push(`El título tiene ${title.length} caracteres; el máximo es 80.`)
-  if (description.length === 0) problems.push('La descripción es obligatoria.')
-  else if (description.length > 500)
-    problems.push(`La descripción tiene ${description.length} caracteres; el máximo es 500.`)
-
-  const canSave = problems.length === 0 && !saving
+  const titleMissing = title.length === 0
+  const descriptionMissing = description.length === 0
+  const canSave = !titleMissing && !descriptionMissing && !saving
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setAttempted(true)
     if (!canSave) return
     setSaving(true)
     setError(null)
@@ -59,48 +65,47 @@ export function EditEntryForm({
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
       <div className="form-field">
-        <label htmlFor="edit-title">Título</label>
+        <label htmlFor="edit-title">
+          Título <Required />
+        </label>
         <input
           id="edit-title"
           value={title}
           onChange={e => setTitle(e.target.value)}
-          maxLength={160}
-          aria-invalid={title.length > 80}
+          maxLength={TITLE_MAX}
+          aria-invalid={attempted && titleMissing}
+          disabled={saving}
           required
         />
-        <CharCounter value={title} max={80} />
+        <CharCounter value={title} max={TITLE_MAX} />
       </div>
 
       <div className="form-field">
-        <label htmlFor="edit-description">Descripción</label>
+        <label htmlFor="edit-description">
+          Descripción <Required />
+        </label>
         <textarea
           id="edit-description"
           value={description}
           onChange={e => setDescription(e.target.value)}
           rows={4}
-          maxLength={800}
-          aria-invalid={description.length > 500}
+          maxLength={DESCRIPTION_MAX}
+          aria-invalid={attempted && descriptionMissing}
+          disabled={saving}
           required
         />
-        <CharCounter value={description} max={500} />
+        <CharCounter value={description} max={DESCRIPTION_MAX} />
       </div>
 
       {error && <p className="admin-error">{error}</p>}
 
-      {problems.length > 0 && (
-        <div className="form-problems" role="status" aria-live="polite">
-          <p className="form-problems-title">Para guardar, corrige lo siguiente:</p>
-          <ul>
-            {problems.map(problem => (
-              <li key={problem}>{problem}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <button type="submit" className="form-submit" disabled={!canSave}>
-        {saving ? 'Guardando…' : 'Guardar cambios'}
-      </button>
+      <div className="form-actions">
+        <span className="form-submit-wrap" onClick={() => setAttempted(true)}>
+          <button type="submit" className="form-submit" disabled={!canSave}>
+            {saving ? 'Guardando…' : 'Guardar cambios'}
+          </button>
+        </span>
+      </div>
     </form>
   )
 }
