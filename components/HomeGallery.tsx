@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import type { Entry } from '@/lib/schema'
 
+const UNTITLED = 'Sin título'
+
 export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyectos: Entry[] }) {
   const [activeEntry, setActiveEntry] = useState<Entry | null>(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
@@ -56,7 +58,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
                             selectEntry(entry)
                           }}
                         >
-                          {entry.title}
+                          {entry.title || UNTITLED}
                         </a>
                       ))}
                     </nav>
@@ -81,7 +83,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
                             selectEntry(entry)
                           }}
                         >
-                          {entry.title}
+                          {entry.title || UNTITLED}
                         </a>
                       ))}
                     </nav>
@@ -125,9 +127,9 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
 
           <section className="trabajo-stage" aria-label="Obra seleccionada">
             <div className="artwork-display">
-              <img src={activeImage?.url ?? '/images/home.jpg'} alt={activeEntry?.title ?? 'Obra destacada'} />
+              <img src={activeImage?.url ?? '/images/home.jpg'} alt={activeEntry?.title || UNTITLED} />
               <div className="artwork-info">
-                <span className="artwork-title">{activeEntry?.title ?? ''}</span>
+                <span className="artwork-title">{activeEntry ? activeEntry.title || UNTITLED : ''}</span>
                 {activeEntry?.description && <span className="artwork-desc">{activeEntry.description}</span>}
               </div>
               {activeEntry && activeEntry.images.length > 1 && (
@@ -141,7 +143,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
                       className={index === activeImageIndex ? 'artwork-thumb active' : 'artwork-thumb'}
                       onClick={() => setActiveImageIndex(index)}
                     >
-                      <img src={image.url} alt={`${activeEntry.title} — ${index + 1}`} />
+                      <img src={image.url} alt={`${activeEntry.title || UNTITLED} — ${index + 1}`} />
                     </button>
                   ))}
                 </div>

@@ -28,7 +28,7 @@ export default async function AdminDashboardPage() {
             <ul className="admin-entry-list">
               {manifest[category].map(entry => (
                 <li key={entry.id}>
-                  <span className="admin-entry-title">{entry.title}</span>
+                  <span className="admin-entry-title">{entry.title || 'Sin título'}</span>
                   <span className="admin-entry-meta">{entry.images.length} imagen(es)</span>
                   <div className="admin-entry-actions">
                     <Link href={`/admin/${category}/${entry.id}`} className="admin-action-btn">

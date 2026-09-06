@@ -105,16 +105,11 @@ export function NewEntryForm() {
   // Inputs are hard-capped at the schema limits, so the only way to be invalid
   // is to leave something empty. Missing fields turn red once a save is tried.
   const categoryMissing = category === ''
-  const titleMissing = title.length === 0
-  const descriptionMissing = description.length === 0
   const imagesMissing = images.length === 0
 
-  const canSubmit =
-    !categoryMissing &&
-    !titleMissing &&
-    !descriptionMissing &&
-    !imagesMissing &&
-    !submitting
+  // Only the category and at least one image are required. Title and
+  // description are optional; HomeGallery falls back to "Sin título".
+  const canSubmit = !categoryMissing && !imagesMissing && !submitting
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -181,23 +176,21 @@ export function NewEntryForm() {
 
       <div className="form-field">
         <label htmlFor="new-entry-title">
-          Título <Required />
+          Título
         </label>
         <input
           id="new-entry-title"
           value={title}
           onChange={e => setTitle(e.target.value)}
           maxLength={TITLE_MAX}
-          aria-invalid={attempted && titleMissing}
           disabled={submitting}
-          required
         />
         <CharCounter value={title} max={TITLE_MAX} />
       </div>
 
       <div className="form-field">
         <label htmlFor="new-entry-description">
-          Descripción <Required />
+          Descripción
         </label>
         <textarea
           id="new-entry-description"
@@ -205,9 +198,7 @@ export function NewEntryForm() {
           onChange={e => setDescription(e.target.value)}
           rows={4}
           maxLength={DESCRIPTION_MAX}
-          aria-invalid={attempted && descriptionMissing}
           disabled={submitting}
-          required
         />
         <CharCounter value={description} max={DESCRIPTION_MAX} />
       </div>
@@ -216,9 +207,13 @@ export function NewEntryForm() {
         <label htmlFor="new-entry-images">
           Imágenes <Required />
         </label>
+        {/* File inputs have no placeholder attribute — the browser owns their inner
+            text — so the native control is visually hidden (still focusable) and
+            this label is the click target and the prompt. */}
         <input
           id="new-entry-images"
           type="file"
+          className="file-input-hidden"
           accept="image/jpeg,image/png,image/webp"
           multiple
           onChange={e => {
@@ -228,7 +223,9 @@ export function NewEntryForm() {
           aria-invalid={attempted && imagesMissing}
           disabled={submitting}
         />
-        <span className="form-note">JPG, PNG o WebP · máximo {MAX_MB} MB por imagen</span>
+        <label htmlFor="new-entry-images" className="file-drop">
+          Haz clic aquí para elegir un archivo. JPG, PNG o WebP · máximo {MAX_MB} MB
+        </label>
       </div>
 
       {images.length > 0 && (

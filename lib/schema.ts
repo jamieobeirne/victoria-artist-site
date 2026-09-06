@@ -10,8 +10,8 @@ export const imageItemSchema = z.object({
 
 export const entrySchema = z.object({
   id: z.string().min(1),
-  title: z.string().min(1).max(80),
-  description: z.string().min(1).max(500),
+  title: z.string().max(80),
+  description: z.string().max(500),
   images: z.array(imageItemSchema).min(1),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -24,8 +24,8 @@ export const manifestSchema = z.object({
 
 export const createEntryRequestSchema = z.object({
   category: categorySchema,
-  title: z.string().min(1).max(80),
-  description: z.string().min(1).max(500),
+  title: z.string().max(80),
+  description: z.string().max(500),
   images: z.array(imageItemSchema).min(1),
 })
 

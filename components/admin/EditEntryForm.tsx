@@ -8,14 +8,6 @@ import { CharCounter } from './CharCounter'
 const TITLE_MAX = 80
 const DESCRIPTION_MAX = 500
 
-function Required() {
-  return (
-    <span className="required-star" aria-hidden="true">
-      *
-    </span>
-  )
-}
-
 export function EditEntryForm({
   category,
   id,
@@ -31,16 +23,13 @@ export function EditEntryForm({
   const [title, setTitle] = useState(initialTitle)
   const [description, setDescription] = useState(initialDescription)
   const [saving, setSaving] = useState(false)
-  const [attempted, setAttempted] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const titleMissing = title.length === 0
-  const descriptionMissing = description.length === 0
-  const canSave = !titleMissing && !descriptionMissing && !saving
+  // Title and description are optional; nothing here can block a save.
+  const canSave = !saving
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setAttempted(true)
     if (!canSave) return
     setSaving(true)
     setError(null)
@@ -66,23 +55,21 @@ export function EditEntryForm({
     <form className="admin-form" onSubmit={handleSubmit}>
       <div className="form-field">
         <label htmlFor="edit-title">
-          Título <Required />
+          Título
         </label>
         <input
           id="edit-title"
           value={title}
           onChange={e => setTitle(e.target.value)}
           maxLength={TITLE_MAX}
-          aria-invalid={attempted && titleMissing}
           disabled={saving}
-          required
         />
         <CharCounter value={title} max={TITLE_MAX} />
       </div>
 
       <div className="form-field">
         <label htmlFor="edit-description">
-          Descripción <Required />
+          Descripción
         </label>
         <textarea
           id="edit-description"
@@ -90,9 +77,7 @@ export function EditEntryForm({
           onChange={e => setDescription(e.target.value)}
           rows={4}
           maxLength={DESCRIPTION_MAX}
-          aria-invalid={attempted && descriptionMissing}
           disabled={saving}
-          required
         />
         <CharCounter value={description} max={DESCRIPTION_MAX} />
       </div>
@@ -100,11 +85,9 @@ export function EditEntryForm({
       {error && <p className="admin-error">{error}</p>}
 
       <div className="form-actions">
-        <span className="form-submit-wrap" onClick={() => setAttempted(true)}>
-          <button type="submit" className="form-submit" disabled={!canSave}>
-            {saving ? 'Guardando…' : 'Guardar cambios'}
-          </button>
-        </span>
+        <button type="submit" className="form-submit" disabled={!canSave}>
+          {saving ? 'Guardando…' : 'Guardar cambios'}
+        </button>
       </div>
     </form>
   )
