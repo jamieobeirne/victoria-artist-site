@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { auth } from '@/lib/auth'
 import { requireAdminSession } from '@/lib/requireAdmin'
 import { categorySchema } from '@/lib/schema'
@@ -36,6 +37,8 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     }
     throw err
   }
+
+  revalidatePath('/home')
 
   try {
     await deleteObject(keyFromPublicUrl(removedImage.url))

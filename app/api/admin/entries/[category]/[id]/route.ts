@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { requireAdminSession } from '@/lib/requireAdmin'
@@ -48,6 +49,8 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     throw err
   }
 
+  revalidatePath('/home')
+
   return NextResponse.json({ ok: true })
 }
 
@@ -79,6 +82,8 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     }
     throw err
   }
+
+  revalidatePath('/home')
 
   // Manifest write already succeeded — the entry is gone either way. R2 cleanup
   // is best-effort: log failures rather than reporting the delete as failed.

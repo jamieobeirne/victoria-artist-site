@@ -1,15 +1,30 @@
 import { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
+import { NodeHttpHandler } from '@smithy/node-http-handler'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
+let _client: S3Client | undefined
+
 function client(): S3Client {
-  return new S3Client({
+  // Built once and reused: a fresh S3Client per call gets its own connection pool,
+  // so keep-alive never applies and every request pays a new TLS handshake.
+  // Still lazy, so env vars are not read at import time.
+  return (_client ??= new S3Client({
     region: 'auto',
     endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
     credentials: {
       accessKeyId: process.env.R2_ACCESS_KEY_ID ?? '',
       secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? '',
     },
-  })
+    // Without these, a dropped connection hangs indefinitely — requestTimeout
+    // defaults to 0, meaning no timeout — and the render dies with a blank
+    // TimeoutError carrying no message. maxAttempts counts the initial call,
+    // so 2 means one call plus one retry.
+    maxAttempts: 2,
+    requestHandler: new NodeHttpHandler({
+      connectionTimeout: 3_000,
+      requestTimeout: 8_000,
+    }),
+  }))
 }
 
 export async function getObject(key: string): Promise<string> {

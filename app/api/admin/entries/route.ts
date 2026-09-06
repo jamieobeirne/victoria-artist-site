@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { auth } from '@/lib/auth'
 import { requireAdminSession } from '@/lib/requireAdmin'
 import { createEntryRequestSchema } from '@/lib/schema'
@@ -27,6 +28,8 @@ export async function POST(req: NextRequest) {
     }
     throw err
   }
+
+  revalidatePath('/home')
 
   return NextResponse.json({ entry }, { status: 201 })
 }
