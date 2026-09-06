@@ -127,7 +127,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
 
           <section className="trabajo-stage" aria-label="Obra seleccionada">
             <div className="artwork-display">
-              <img src={activeImage?.url ?? '/images/home.jpg'} alt={activeEntry?.title || UNTITLED} />
+              <img src={activeImage?.url ?? '/images/home.jpg'} alt={activeEntry ? activeEntry.title || UNTITLED : 'Obra destacada'} />
               <div className="artwork-info">
                 <span className="artwork-title">{activeEntry ? activeEntry.title || UNTITLED : ''}</span>
                 {activeEntry?.description && <span className="artwork-desc">{activeEntry.description}</span>}
