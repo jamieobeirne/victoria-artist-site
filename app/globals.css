@@ -777,6 +777,21 @@ body {
 
 /* --- Admin: navigation, actions, responsive --- */
 
+.form-note {
+  font-size: 0.75rem;
+  color: #8a867f;
+}
+
+.admin-file-errors {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.admin-file-errors li + li {
+  margin-top: 0.2rem;
+}
+
 .admin-image-name {
   flex: 1;
   font-size: 0.8rem;

@@ -3,10 +3,16 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createEntryRequestSchema, type Category } from '@/lib/schema'
+import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_BYTES } from '@/lib/upload'
 import { CharCounter } from './CharCounter'
 
 const TITLE_MAX = 80
 const DESCRIPTION_MAX = 500
+const MAX_MB = Math.round(MAX_IMAGE_BYTES / (1024 * 1024))
+
+function sizeInMb(bytes: number) {
+  return (bytes / (1024 * 1024)).toFixed(1)
+}
 
 type PendingImage = { id: string; file: File; previewUrl: string }
 
@@ -27,16 +33,33 @@ export function NewEntryForm() {
   const [submitting, setSubmitting] = useState(false)
   const [attempted, setAttempted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fileErrors, setFileErrors] = useState<string[]>([])
   const abortRef = useRef<AbortController | null>(null)
 
+  // Checked here rather than at save time: the server enforces the same limits,
+  // but finding out after a long upload is a poor way to learn a file is too big.
   function handleFiles(fileList: FileList | null) {
     if (!fileList || fileList.length === 0) return
-    const next = Array.from(fileList).map(file => ({
-      id: crypto.randomUUID(),
-      file,
-      previewUrl: URL.createObjectURL(file),
-    }))
-    setImages(prev => [...prev, ...next])
+
+    const accepted: PendingImage[] = []
+    const rejected: string[] = []
+
+    for (const file of Array.from(fileList)) {
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+        rejected.push(
+          `${file.name}: formato no admitido${file.type ? ` (${file.type})` : ''}. Usa JPG, PNG o WebP.`
+        )
+      } else if (file.size > MAX_IMAGE_BYTES) {
+        rejected.push(
+          `${file.name}: ${sizeInMb(file.size)} MB. Usa un archivo de menos de ${MAX_MB} MB.`
+        )
+      } else {
+        accepted.push({ id: crypto.randomUUID(), file, previewUrl: URL.createObjectURL(file) })
+      }
+    }
+
+    setFileErrors(rejected)
+    if (accepted.length > 0) setImages(prev => [...prev, ...accepted])
   }
 
   function removeImage(id: string) {
@@ -198,10 +221,14 @@ export function NewEntryForm() {
           type="file"
           accept="image/jpeg,image/png,image/webp"
           multiple
-          onChange={e => handleFiles(e.target.files)}
+          onChange={e => {
+            handleFiles(e.target.files)
+            e.target.value = ''
+          }}
           aria-invalid={attempted && imagesMissing}
           disabled={submitting}
         />
+        <span className="form-note">JPG, PNG o WebP · máximo {MAX_MB} MB por imagen</span>
       </div>
 
       {images.length > 0 && (
@@ -220,6 +247,14 @@ export function NewEntryForm() {
                 Quitar
               </button>
             </li>
+          ))}
+        </ul>
+      )}
+
+      {fileErrors.length > 0 && (
+        <ul className="admin-error admin-file-errors" role="alert">
+          {fileErrors.map(message => (
+            <li key={message}>{message}</li>
           ))}
         </ul>
       )}
