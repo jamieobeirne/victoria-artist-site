@@ -7,9 +7,8 @@ import { CharCounter } from './CharCounter'
 
 const TITLE_MAX = 80
 const DESCRIPTION_MAX = 500
-const CAPTION_MAX = 150
 
-type PendingImage = { id: string; file: File; caption: string; previewUrl: string }
+type PendingImage = { id: string; file: File; previewUrl: string }
 
 function Required() {
   return (
@@ -35,14 +34,9 @@ export function NewEntryForm() {
     const next = Array.from(fileList).map(file => ({
       id: crypto.randomUUID(),
       file,
-      caption: '',
       previewUrl: URL.createObjectURL(file),
     }))
     setImages(prev => [...prev, ...next])
-  }
-
-  function updateCaption(id: string, caption: string) {
-    setImages(prev => prev.map(img => (img.id === id ? { ...img, caption } : img)))
   }
 
   function removeImage(id: string) {
@@ -82,7 +76,7 @@ export function NewEntryForm() {
     })
     if (!putRes.ok) throw new Error('No se pudo subir la imagen')
 
-    return { id: pending.id, url: publicUrl as string, caption: pending.caption }
+    return { id: pending.id, url: publicUrl as string, caption: '' }
   }
 
   // Inputs are hard-capped at the schema limits, so the only way to be invalid
@@ -91,14 +85,12 @@ export function NewEntryForm() {
   const titleMissing = title.length === 0
   const descriptionMissing = description.length === 0
   const imagesMissing = images.length === 0
-  const captionsMissing = images.some(img => img.caption.length === 0)
 
   const canSubmit =
     !categoryMissing &&
     !titleMissing &&
     !descriptionMissing &&
     !imagesMissing &&
-    !captionsMissing &&
     !submitting
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -218,20 +210,7 @@ export function NewEntryForm() {
             <li key={img.id}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img.previewUrl} alt="" width={96} height={96} className="admin-image-thumb" />
-              <div className="form-field">
-                <label htmlFor={`caption-${img.id}`}>
-                  Descripción breve de la imagen <Required />
-                </label>
-                <input
-                  id={`caption-${img.id}`}
-                  value={img.caption}
-                  onChange={e => updateCaption(img.id, e.target.value)}
-                  maxLength={CAPTION_MAX}
-                  aria-invalid={attempted && img.caption.length === 0}
-                  disabled={submitting}
-                />
-                <CharCounter value={img.caption} max={CAPTION_MAX} />
-              </div>
+              <span className="admin-image-name">{img.file.name}</span>
               <button
                 type="button"
                 className="admin-danger-btn"

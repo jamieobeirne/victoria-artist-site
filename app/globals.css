@@ -606,14 +606,6 @@ body {
 }
 
 .admin-danger-btn {
-  background: none;
-  border: 1px solid #cdcdc9;
-  padding: 0.35rem 0.9rem;
-  font-family: inherit;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  cursor: pointer;
   color: #8a2e2e;
 }
 
@@ -785,6 +777,13 @@ body {
 
 /* --- Admin: navigation, actions, responsive --- */
 
+.admin-image-name {
+  flex: 1;
+  font-size: 0.8rem;
+  color: #6a6a66;
+  word-break: break-all;
+}
+
 .admin-entry-title {
   font-weight: 600;
 }
@@ -795,30 +794,34 @@ body {
   gap: 0.5rem;
 }
 
-.admin-action-btn {
-  display: inline-block;
+/* Editar is an anchor and Eliminar is a button; browsers give those different
+   default line-height and alignment, so the metrics are shared here to keep the
+   pair identical in size. */
+.admin-action-btn,
+.admin-danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: 1px solid #cdcdc9;
   padding: 0.35rem 0.9rem;
   font-family: inherit;
   font-size: 0.72rem;
+  line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #252525;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
 }
 
+.admin-action-btn {
+  color: #252525;
+}
+
 .admin-action-btn:hover {
   background: #ece9e3;
   border-color: #b8b4ae;
-}
-
-.admin-brand {
-  color: #2f6b45;
-  font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 .required-star {

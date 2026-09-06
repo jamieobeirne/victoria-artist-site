@@ -125,10 +125,9 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
 
           <section className="trabajo-stage" aria-label="Obra seleccionada">
             <div className="artwork-display">
-              <img src={activeImage?.url ?? '/images/home.jpg'} alt="Obra destacada" />
+              <img src={activeImage?.url ?? '/images/home.jpg'} alt={activeEntry?.title ?? 'Obra destacada'} />
               <div className="artwork-info">
                 <span className="artwork-title">{activeEntry?.title ?? ''}</span>
-                <span className="artwork-meta">{activeImage?.caption ?? ''}</span>
                 {activeEntry?.description && <span className="artwork-desc">{activeEntry.description}</span>}
               </div>
               {activeEntry && activeEntry.images.length > 1 && (
@@ -142,7 +141,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
                       className={index === activeImageIndex ? 'artwork-thumb active' : 'artwork-thumb'}
                       onClick={() => setActiveImageIndex(index)}
                     >
-                      <img src={image.url} alt={image.caption} />
+                      <img src={image.url} alt={`${activeEntry.title} — ${index + 1}`} />
                     </button>
                   ))}
                 </div>

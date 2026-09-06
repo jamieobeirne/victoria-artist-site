@@ -41,8 +41,7 @@ export default async function EditEntryPage({
           {entry.images.map(img => (
             <li key={img.id}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img.url} alt={img.caption} width={96} height={96} className="admin-image-thumb" />
-              <span>{img.caption}</span>
+              <img src={img.url} alt={entry.title} width={96} height={96} className="admin-image-thumb" />
               <DeleteImageButton category={categoryResult.data} id={entry.id} imageId={img.id} />
             </li>
           ))}
