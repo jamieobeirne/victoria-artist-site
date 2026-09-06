@@ -2,8 +2,9 @@
 
 * { box-sizing: border-box; }
 
-/* Base type scale. 115% makes every rem-based size 15% larger at once. */
-html { font-size: 115%; }
+/* Base type scale, applied once at the root so every rem-based size
+   scales together. 139% = 15%, then 10%, then 10% again. */
+html { font-size: 139%; }
 
 body {
   margin: 0;
@@ -784,6 +785,42 @@ body {
 
 /* --- Admin: navigation, actions, responsive --- */
 
+.admin-entry-title {
+  font-weight: 600;
+}
+
+.admin-entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-action-btn {
+  display: inline-block;
+  background: none;
+  border: 1px solid #cdcdc9;
+  padding: 0.35rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #252525;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-action-btn:hover {
+  background: #ece9e3;
+  border-color: #b8b4ae;
+}
+
+.admin-brand {
+  color: #2f6b45;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
 .required-star {
   color: #8a2e2e;
   font-weight: 600;
@@ -851,7 +888,17 @@ body {
   .admin-entry-meta {
     margin-right: 0;
     width: 100%;
+    order: 2;
+  }
+
+  .admin-entry-actions {
     order: 3;
+    width: 100%;
+  }
+
+  .admin-entry-actions > * {
+    flex: 1;
+    text-align: center;
   }
 
   .admin-image-list li {

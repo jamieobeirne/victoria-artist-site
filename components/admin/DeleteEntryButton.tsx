@@ -4,7 +4,15 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Category } from '@/lib/schema'
 
-export function DeleteEntryButton({ category, id }: { category: Category; id: string }) {
+export function DeleteEntryButton({
+  category,
+  id,
+  label = 'Eliminar entrada',
+}: {
+  category: Category
+  id: string
+  label?: string
+}) {
   const router = useRouter()
   const [deleting, setDeleting] = useState(false)
 
@@ -18,7 +26,7 @@ export function DeleteEntryButton({ category, id }: { category: Category; id: st
 
   return (
     <button type="button" className="admin-danger-btn" onClick={handleDelete} disabled={deleting}>
-      {deleting ? 'Eliminando…' : 'Eliminar entrada'}
+      {deleting ? 'Eliminando…' : label}
     </button>
   )
 }

@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="admin-shell">
       <header className="admin-header">
-        <span>Panel de Victoria</span>
+        <span className="admin-brand">Panel de Victoria</span>
         <form
           action={async () => {
             'use server'

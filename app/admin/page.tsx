@@ -28,9 +28,14 @@ export default async function AdminDashboardPage() {
             <ul className="admin-entry-list">
               {manifest[category].map(entry => (
                 <li key={entry.id}>
-                  <Link href={`/admin/${category}/${entry.id}`}>{entry.title}</Link>
+                  <span className="admin-entry-title">{entry.title}</span>
                   <span className="admin-entry-meta">{entry.images.length} imagen(es)</span>
-                  <DeleteEntryButton category={category} id={entry.id} />
+                  <div className="admin-entry-actions">
+                    <Link href={`/admin/${category}/${entry.id}`} className="admin-action-btn">
+                      Editar
+                    </Link>
+                    <DeleteEntryButton category={category} id={entry.id} label="Eliminar" />
+                  </div>
                 </li>
               ))}
             </ul>
