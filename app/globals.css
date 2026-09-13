@@ -166,10 +166,9 @@ body {
   color: #121212;
 }
 
-/* The address is shown, not just linked. A mailto: does nothing visible on a
-   desktop with no mail handler registered, and it never reveals the address,
-   so the icon alone can leave a visitor with no way to make contact. The copy
-   button means a click always does something. Markup lives in ContactEmail. */
+/* The envelope reveals the address rather than linking to it. A mailto: does
+   nothing on a machine with no mail handler registered, so the icon would
+   otherwise click into silence. Markup lives in ContactEmail. */
 .contact-email {
   display: flex;
   align-items: center;
@@ -178,10 +177,25 @@ body {
   font-size: 0.76rem;
 }
 
-.contact-email-link {
+.contact-email-toggle {
   display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+  flex: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #505050;
+  cursor: pointer;
+}
+
+.contact-email-toggle:hover {
+  color: #121212;
+}
+
+.contact-email-toggle:disabled {
+  cursor: default;
+}
+
+.contact-email-link {
   color: #505050;
   text-decoration: none;
   overflow-wrap: anywhere;
@@ -206,6 +220,7 @@ body {
   color: #121212;
 }
 
+.contact-email-toggle:focus-visible,
 .contact-email-link:focus-visible,
 .contact-email-copy:focus-visible {
   outline: 1.5px solid #121212;

@@ -8,13 +8,17 @@ const ADDRESS = 'victoriard6@gmail.com'
  * Shown in both Sidebar and HomeGallery, which duplicate each other's markup.
  * It lives here so the two cannot drift apart.
  *
- * The address is visible rather than hidden behind an icon: a mailto: link
- * does nothing at all on a machine with no mail handler registered, and it
- * never reveals the address, so an icon on its own can leave a visitor with
- * no way to make contact. The copy button guarantees the click always does
- * something, whatever the visitor's setup.
+ * The envelope is a button, not a mailto: link. A mailto: does nothing at all
+ * on a machine with no mail handler registered — the browser flashes the target
+ * and drops it — so the icon reveals the address instead, which is something
+ * every visitor can act on. Once revealed it is also a mailto:, for anyone who
+ * does have a client, and copyable for anyone who doesn't.
+ *
+ * The address is rendered only after the click, so it is absent from the served
+ * HTML until then.
  */
 export default function ContactEmail() {
+  const [revealed, setRevealed] = useState(false)
   const [copied, setCopied] = useState(false)
 
   async function copy() {
@@ -30,11 +34,18 @@ export default function ContactEmail() {
 
   return (
     <div className="contact-email">
-      <a href={`mailto:${ADDRESS}`} className="contact-email-link">
+      <button
+        type="button"
+        className="contact-email-toggle"
+        onClick={() => setRevealed(true)}
+        aria-expanded={revealed}
+        aria-label={revealed ? 'Dirección de correo' : 'Mostrar dirección de correo'}
+        disabled={revealed}
+      >
         <svg
           viewBox="0 0 24 24"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -43,11 +54,18 @@ export default function ContactEmail() {
           <rect x="2" y="4" width="20" height="16" rx="2" />
           <path d="M2 6l10 7 10-7" />
         </svg>
-        <span>{ADDRESS}</span>
-      </a>
-      <button type="button" className="contact-email-copy" onClick={copy} aria-live="polite">
-        {copied ? 'copiado' : 'copiar'}
       </button>
+
+      {revealed && (
+        <>
+          <a href={`mailto:${ADDRESS}`} className="contact-email-link">
+            {ADDRESS}
+          </a>
+          <button type="button" className="contact-email-copy" onClick={copy} aria-live="polite">
+            {copied ? 'copiado' : 'copiar'}
+          </button>
+        </>
+      )}
     </div>
   )
 }
