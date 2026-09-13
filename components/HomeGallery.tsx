@@ -122,6 +122,7 @@ export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyecto
                   </svg>
                 </a>
               </div>
+              <a href="mailto:victoriard6@gmail.com" className="sidebar-email">victoriard6@gmail.com</a>
             </nav>
           </aside>
 

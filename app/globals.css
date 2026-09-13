@@ -166,6 +166,29 @@ body {
   color: #121212;
 }
 
+/* The address is shown, not just linked. A mailto: does nothing visible on a
+   desktop with no mail handler registered, and it never reveals the address,
+   so the icon alone leaves a visitor with no way to make contact. */
+.sidebar-email {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: #505050;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.sidebar-email:hover {
+  color: #121212;
+  text-decoration: underline;
+}
+
+.sidebar-email:focus-visible {
+  outline: 1.5px solid #121212;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 .sidebar-nav a:focus-visible,
 .sidebar-secondary a:focus-visible,
 .social-icon:focus-visible {
