@@ -1,6 +1,6 @@
 'use client'
 
-import ContactEmail from './ContactEmail'
+import ContactLinks from './ContactLinks'
 import { useState } from 'react'
 import Link from 'next/link'
 
@@ -53,16 +53,7 @@ export default function Sidebar({ activePage }: SidebarProps) {
           </div>
         </div>
 
-        <div className="sidebar-social" aria-label="Redes sociales">
-          <a href="https://www.instagram.com/victoria_r_d_" aria-label="Instagram" className="social-icon" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="2" y="2" width="20" height="20" rx="5" />
-              <circle cx="12" cy="12" r="5" />
-              <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
-            </svg>
-          </a>
-        </div>
-        <ContactEmail />
+        <ContactLinks />
       </nav>
     </aside>
   )

@@ -168,31 +168,28 @@ body {
 
 /* The envelope reveals the address rather than linking to it. A mailto: does
    nothing on a machine with no mail handler registered, so the icon would
-   otherwise click into silence. Markup lives in ContactEmail. */
-.contact-email {
+   otherwise click into silence. The address sits under the icon row and hides
+   itself again after 10s. Markup lives in ContactLinks. */
+.sidebar-contact {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.6rem;
-  font-size: 0.76rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
 }
 
-.contact-email-toggle {
-  display: inline-flex;
-  flex: none;
+.contact-toggle {
   border: 0;
   background: none;
   padding: 0;
-  color: #505050;
   cursor: pointer;
+  font: inherit;
 }
 
-.contact-email-toggle:hover {
-  color: #121212;
-}
-
-.contact-email-toggle:disabled {
-  cursor: default;
+.contact-email {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.76rem;
 }
 
 .contact-email-link {
@@ -220,7 +217,6 @@ body {
   color: #121212;
 }
 
-.contact-email-toggle:focus-visible,
 .contact-email-link:focus-visible,
 .contact-email-copy:focus-visible {
   outline: 1.5px solid #121212;
