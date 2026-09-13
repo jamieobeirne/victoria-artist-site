@@ -3,8 +3,14 @@
 * { box-sizing: border-box; }
 
 /* Base type scale, applied once at the root so every rem-based size
-   scales together. 139% = 15%, then 10%, then 10% again. */
-html { font-size: 139%; }
+   scales together. 115% is the public site's scale and the original value.
+
+   The admin panel is sized larger. It has to be set on <html> rather than on
+   .admin-shell, because admin sizes are in rem and rem always resolves
+   against the root element, not the nearest ancestor. 139% = 115% +10% +10%. */
+html { font-size: 115%; }
+html:has(.admin-shell),
+html:has(.admin-signin) { font-size: 139%; }
 
 body {
   margin: 0;
