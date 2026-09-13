@@ -213,19 +213,23 @@ body {
   margin-bottom: 0;
 }
 
-/* Bio page: portrait beside the text, stacking under it on narrow screens.
+/* Bio page: portrait beside the text, wrapping to stacked when the column is
+   too narrow to hold both. flex-wrap does this from the items' own basis, so
+   there is no breakpoint to keep in sync with the sidebar width. Do not use a
+   percentage basis here — the column is often narrower than it looks and a
+   percentage silently collapses to the floor.
    Overrides .inner-body max-width, so it must stay after that rule. */
 .bio-body {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1.6rem;
   max-width: 820px;
 }
 
-/* Fluid between a 200px floor and a 320px ceiling so the portrait tracks the
-   text column instead of sitting at one fixed width. ~280px at full size. */
 .bio-figure {
-  flex: 0 0 clamp(200px, 34%, 320px);
+  flex: 1 1 340px;
+  max-width: 440px;
   margin: 0;
 }
 
@@ -235,23 +239,8 @@ body {
   height: auto;
 }
 
-@media (max-width: 640px) {
-  .bio-body {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .bio-figure {
-    flex-basis: auto;
-    width: 100%;
-    max-width: 360px;
-  }
-}
-
-.bio-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 520px;
+.bio-text {
+  flex: 1 1 320px;
 }
 
 .bio-table tr {

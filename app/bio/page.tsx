@@ -20,14 +20,16 @@ export default function BioPage() {
               className="bio-photo"
             />
           </figure>
-          <p>
-            Victoria Ruíz Díaz (1984, Argentina) es artista visual y tatuadora. Se formó en Artes
-            Visuales, Gestión Cultural y Diseño de la Comunicación Visual en Paraná y Santa Fe. Desde
-            2005 ha participado en exposiciones colectivas e individuales en diversas ciudades de
-            Argentina y el exterior, recibiendo premios, becas y participando en residencias artísticas
-            en Brasil, Miami y distintas provincias argentinas. Actualmente reside en Barcelona, donde
-            continúa desarrollando su obra artística y del tatuaje.
-          </p>
+          <div className="bio-text">
+              <p>
+                Victoria Ruíz Díaz (1984, Argentina) es artista visual y tatuadora. Se formó en Artes
+                Visuales, Gestión Cultural y Diseño de la Comunicación Visual en Paraná y Santa Fe. Desde
+                2005 ha participado en exposiciones colectivas e individuales en diversas ciudades de
+                Argentina y el exterior, recibiendo premios, becas y participando en residencias artísticas
+                en Brasil, Miami y distintas provincias argentinas. Actualmente reside en Barcelona, donde
+                continúa desarrollando su obra artística y del tatuaje.
+              </p>
+          </div>
         </div>
       </section>
     </InnerLayout>
