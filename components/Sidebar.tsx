@@ -1,5 +1,6 @@
 'use client'
 
+import ContactEmail from './ContactEmail'
 import { useState } from 'react'
 import Link from 'next/link'
 
@@ -53,12 +54,6 @@ export default function Sidebar({ activePage }: SidebarProps) {
         </div>
 
         <div className="sidebar-social" aria-label="Redes sociales">
-          <a href="mailto:victoriard6@gmail.com" aria-label="Email" className="social-icon">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-              <path d="M2 6l10 7 10-7" />
-            </svg>
-          </a>
           <a href="https://www.instagram.com/victoria_r_d_" aria-label="Instagram" className="social-icon" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -67,7 +62,7 @@ export default function Sidebar({ activePage }: SidebarProps) {
             </svg>
           </a>
         </div>
-        <a href="mailto:victoriard6@gmail.com" className="sidebar-email">victoriard6@gmail.com</a>
+        <ContactEmail />
       </nav>
     </aside>
   )
