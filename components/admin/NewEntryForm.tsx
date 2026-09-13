@@ -224,7 +224,7 @@ export function NewEntryForm() {
           disabled={submitting}
         />
         <label htmlFor="new-entry-images" className="file-drop">
-          Haz clic aquí para elegir un archivo. JPG, PNG o WebP · máximo {MAX_MB} MB
+          Haz clic aquí para elegir una o varias imágenes. JPG, PNG o WebP · máximo {MAX_MB} MB por imagen
         </label>
       </div>
 
