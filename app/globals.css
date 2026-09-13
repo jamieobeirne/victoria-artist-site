@@ -222,8 +222,10 @@ body {
   max-width: 820px;
 }
 
+/* Fluid between a 200px floor and a 320px ceiling so the portrait tracks the
+   text column instead of sitting at one fixed width. ~280px at full size. */
 .bio-figure {
-  flex: 0 0 200px;
+  flex: 0 0 clamp(200px, 34%, 320px);
   margin: 0;
 }
 
@@ -241,7 +243,8 @@ body {
 
   .bio-figure {
     flex-basis: auto;
-    max-width: 260px;
+    width: 100%;
+    max-width: 360px;
   }
 }
 
