@@ -652,7 +652,19 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.6rem;
+}
+
+/* Adding and removing live in the same section, so the add control needs air
+   above it or its label reads as another heading butted against the last row. */
+.admin-add-images {
+  margin-top: 2.2rem;
+}
+
+/* A button that is a direct child of the column would otherwise stretch the
+   full width of the panel. */
+.admin-dashboard > .admin-danger-btn {
+  align-self: flex-start;
 }
 
 .admin-image-list li {
@@ -661,7 +673,13 @@ body {
   gap: 0.9rem;
 }
 
+/* Pinned in CSS, not left to the width/height attributes: portrait scans were
+   rendering taller than landscape ones, so every row was a different height and
+   the delete buttons drifted. flex: none stops the row squashing them. */
 .admin-image-thumb {
+  width: 72px;
+  height: 72px;
+  flex: none;
   object-fit: cover;
   border: 1px solid #cdcdc9;
 }

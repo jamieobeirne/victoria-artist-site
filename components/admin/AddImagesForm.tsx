@@ -75,7 +75,7 @@ export function AddImagesForm({ category, id }: { category: Category; id: string
   }
 
   return (
-    <form className="admin-form" onSubmit={handleSubmit}>
+    <form className="admin-form admin-add-images" onSubmit={handleSubmit}>
       <div className="form-field">
         <label htmlFor="add-images">Añadir imágenes</label>
         {/* Hidden native control plus a styled label, same as the new-entry
@@ -93,7 +93,7 @@ export function AddImagesForm({ category, id }: { category: Category; id: string
           disabled={submitting}
         />
         <label htmlFor="add-images" className="file-drop">
-          Haz clic aquí para añadir una o varias imágenes. JPG, PNG o WebP · máximo {MAX_MB} MB por imagen
+          Haz clic para añadir imágenes · JPG, PNG o WebP · máx. {MAX_MB} MB
         </label>
       </div>
 
