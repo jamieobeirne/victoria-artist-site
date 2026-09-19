@@ -347,13 +347,6 @@ body {
   }
 }
 
-.contact-form {
-  max-width: 460px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .form-field {
   display: flex;
   flex-direction: column;
@@ -403,58 +396,6 @@ body {
   border-color: #b8b4ae;
 }
 
-.year-nav {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.year-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.86rem;
-  color: #505050;
-  padding: 0.22rem 0;
-  text-align: left;
-  width: 100%;
-}
-
-.year-btn:hover { color: #121212; }
-
-.year-btn:focus-visible {
-  outline: 1.5px solid #121212;
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-.year-btn.open { color: #121212; font-weight: 500; }
-
-.year-dropdown {
-  list-style: none;
-  margin: 0;
-  padding: 0.08rem 0 0.38rem 0.9rem;
-}
-
-.year-dropdown a {
-  display: block;
-  font-size: 0.78rem;
-  color: #909090;
-  text-decoration: none;
-  padding: 0.13rem 0;
-  letter-spacing: 0.04em;
-}
-
-.year-dropdown a:hover { color: #252525; }
-.year-dropdown a.sub-active { color: #121212; font-weight: 500; }
-
-.year-dropdown a:focus-visible {
-  outline: 1.5px solid #121212;
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
 .trabajo-stage { padding-top: 0; }
 
 .artwork-display img {
@@ -476,18 +417,7 @@ body {
 }
 
 .artwork-title { font-size: 0.82rem; color: #252525; }
-.artwork-meta  { font-size: 0.74rem; color: #909090; font-style: italic; }
 .artwork-desc  { font-size: 0.8rem; color: #505050; line-height: 1.6; margin-top: 0.4rem; }
-
-.content-stage img {
-  display: block;
-  width: 100%;
-  max-height: calc(100vh - 40px);
-  object-fit: contain;
-  object-position: center top;
-  border: 1px solid #cdcdc9;
-  background: #e8e8e5;
-}
 
 .nav-toggle {
   background: none;
@@ -794,8 +724,6 @@ body {
   .artwork-display img {
     max-height: 70vw;
   }
-
-  .content-stage img { max-height: none; }
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
@@ -825,36 +753,6 @@ body {
 .form-submit:disabled:hover {
   background: #f2f0ec;
   border-color: #e6e4df;
-}
-
-.form-hint {
-  margin: 0;
-  color: #8a867f;
-  font-size: 0.8rem;
-}
-
-.form-problems {
-  border-left: 2px solid #8a2e2e;
-  background: #faf4f3;
-  padding: 0.7rem 0.9rem;
-  color: #8a2e2e;
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.form-problems-title {
-  margin: 0 0 0.35rem;
-  font-weight: 600;
-}
-
-.form-problems ul {
-  margin: 0;
-  padding-left: 1.1rem;
-  list-style: disc;
-}
-
-.form-problems li + li {
-  margin-top: 0.2rem;
 }
 
 .form-field input[aria-invalid='true'],

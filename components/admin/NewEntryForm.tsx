@@ -4,6 +4,7 @@ import { useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createEntryRequestSchema, type Category } from '@/lib/schema'
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_BYTES } from '@/lib/upload'
+import { compressImage } from '@/lib/compress'
 import { CharCounter } from './CharCounter'
 
 const TITLE_MAX = 80
@@ -75,13 +76,18 @@ export function NewEntryForm() {
   }
 
   async function uploadImage(pending: PendingImage, signal: AbortSignal) {
+    // Shrink before presigning, so the key's extension, the content type and
+    // the size the server validates all describe the file that is actually PUT.
+    // compressImage falls back to the original on any failure.
+    const file = await compressImage(pending.file)
+
     const presignRes = await fetch('/api/admin/upload-url', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        filename: pending.file.name,
-        contentType: pending.file.type,
-        size: pending.file.size,
+        filename: file.name,
+        contentType: file.type,
+        size: file.size,
       }),
       signal,
     })
@@ -93,8 +99,8 @@ export function NewEntryForm() {
 
     const putRes = await fetch(uploadUrl, {
       method: 'PUT',
-      body: pending.file,
-      headers: { 'Content-Type': pending.file.type },
+      body: file,
+      headers: { 'Content-Type': file.type },
       signal,
     })
     if (!putRes.ok) throw new Error('No se pudo subir la imagen')
