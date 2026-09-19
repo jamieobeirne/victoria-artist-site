@@ -73,3 +73,33 @@ export function deleteImage(
   nextList[idx] = updated
   return { manifest: { ...manifest, [category]: nextList }, removedImage }
 }
+
+export function addImages(
+  manifest: Manifest,
+  category: Category,
+  entryId: string,
+  images: ImageItem[]
+): Manifest {
+  if (images.length === 0) throw new Error('No images given')
+
+  const list = manifest[category]
+  const idx = list.findIndex(e => e.id === entryId)
+  if (idx === -1) throw new Error(`Entry "${entryId}" not found in "${category}"`)
+
+  const entry = list[idx]
+
+  // Appended, never inserted. HomeGallery leads with images[0], so a photo
+  // uploaded later must not displace the one Victoria chose to lead with.
+  const existing = new Set(entry.images.map(img => img.id))
+  const clash = images.find(img => existing.has(img.id))
+  if (clash) throw new Error(`Image "${clash.id}" is already on entry "${entryId}"`)
+
+  const updated: Entry = {
+    ...entry,
+    images: [...entry.images, ...images],
+    updatedAt: new Date().toISOString(),
+  }
+  const nextList = [...list]
+  nextList[idx] = updated
+  return { ...manifest, [category]: nextList }
+}

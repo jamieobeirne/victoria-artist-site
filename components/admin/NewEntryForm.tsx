@@ -3,19 +3,11 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createEntryRequestSchema, type Category } from '@/lib/schema'
-import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_BYTES } from '@/lib/upload'
-import { compressImage } from '@/lib/compress'
+import { acceptFiles, uploadImage, MAX_MB, type PendingImage } from './imageUpload'
 import { CharCounter } from './CharCounter'
 
 const TITLE_MAX = 80
 const DESCRIPTION_MAX = 500
-const MAX_MB = Math.round(MAX_IMAGE_BYTES / (1024 * 1024))
-
-function sizeInMb(bytes: number) {
-  return (bytes / (1024 * 1024)).toFixed(1)
-}
-
-type PendingImage = { id: string; file: File; previewUrl: string }
 
 function Required() {
   return (
@@ -37,28 +29,8 @@ export function NewEntryForm() {
   const [fileErrors, setFileErrors] = useState<string[]>([])
   const abortRef = useRef<AbortController | null>(null)
 
-  // Checked here rather than at save time: the server enforces the same limits,
-  // but finding out after a long upload is a poor way to learn a file is too big.
   function handleFiles(fileList: FileList | null) {
-    if (!fileList || fileList.length === 0) return
-
-    const accepted: PendingImage[] = []
-    const rejected: string[] = []
-
-    for (const file of Array.from(fileList)) {
-      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-        rejected.push(
-          `${file.name}: formato no admitido${file.type ? ` (${file.type})` : ''}. Usa JPG, PNG o WebP.`
-        )
-      } else if (file.size > MAX_IMAGE_BYTES) {
-        rejected.push(
-          `${file.name}: ${sizeInMb(file.size)} MB. Usa un archivo de menos de ${MAX_MB} MB.`
-        )
-      } else {
-        accepted.push({ id: crypto.randomUUID(), file, previewUrl: URL.createObjectURL(file) })
-      }
-    }
-
+    const { accepted, rejected } = acceptFiles(fileList)
     setFileErrors(rejected)
     if (accepted.length > 0) setImages(prev => [...prev, ...accepted])
   }
@@ -73,39 +45,6 @@ export function NewEntryForm() {
 
   function cancelUpload() {
     abortRef.current?.abort()
-  }
-
-  async function uploadImage(pending: PendingImage, signal: AbortSignal) {
-    // Shrink before presigning, so the key's extension, the content type and
-    // the size the server validates all describe the file that is actually PUT.
-    // compressImage falls back to the original on any failure.
-    const file = await compressImage(pending.file)
-
-    const presignRes = await fetch('/api/admin/upload-url', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        filename: file.name,
-        contentType: file.type,
-        size: file.size,
-      }),
-      signal,
-    })
-    if (!presignRes.ok) {
-      const body = await presignRes.json().catch(() => ({}))
-      throw new Error(body.error ?? 'No se pudo preparar la subida')
-    }
-    const { uploadUrl, publicUrl } = await presignRes.json()
-
-    const putRes = await fetch(uploadUrl, {
-      method: 'PUT',
-      body: file,
-      headers: { 'Content-Type': file.type },
-      signal,
-    })
-    if (!putRes.ok) throw new Error('No se pudo subir la imagen')
-
-    return { id: pending.id, url: publicUrl as string, caption: '' }
   }
 
   // Inputs are hard-capped at the schema limits, so the only way to be invalid

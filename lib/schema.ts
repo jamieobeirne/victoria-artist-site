@@ -29,8 +29,13 @@ export const createEntryRequestSchema = z.object({
   images: z.array(imageItemSchema).min(1),
 })
 
+export const addImagesRequestSchema = z.object({
+  images: z.array(imageItemSchema).min(1),
+})
+
 export type Category = z.infer<typeof categorySchema>
 export type ImageItem = z.infer<typeof imageItemSchema>
 export type Entry = z.infer<typeof entrySchema>
 export type Manifest = z.infer<typeof manifestSchema>
 export type CreateEntryRequest = z.infer<typeof createEntryRequestSchema>
+export type AddImagesRequest = z.infer<typeof addImagesRequestSchema>

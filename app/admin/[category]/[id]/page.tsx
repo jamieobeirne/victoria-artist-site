@@ -5,6 +5,7 @@ import { categorySchema } from '@/lib/schema'
 import { EditEntryForm } from '@/components/admin/EditEntryForm'
 import { DeleteEntryButton } from '@/components/admin/DeleteEntryButton'
 import { DeleteImageButton } from '@/components/admin/DeleteImageButton'
+import { AddImagesForm } from '@/components/admin/AddImagesForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,6 +47,8 @@ export default async function EditEntryPage({
             </li>
           ))}
         </ul>
+
+        <AddImagesForm category={categoryResult.data} id={entry.id} />
       </section>
 
       <DeleteEntryButton category={categoryResult.data} id={entry.id} />
