@@ -3,7 +3,9 @@ import Sidebar from './Sidebar'
 type ActivePage = 'statement' | 'bio' | 'cv' | 'trabajo' | 'proyectos'
 
 interface InnerLayoutProps {
-  activePage: ActivePage
+  // Optional: /privacidad is a real page but not a menu item, so nothing in
+  // the sidebar should be marked active while it is open.
+  activePage?: ActivePage
   children: React.ReactNode
 }
 
