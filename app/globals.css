@@ -412,8 +412,9 @@ body {
   transition: opacity 0.2s ease;
 }
 
+/* Sits above the image, so the breathing room goes underneath it. */
 .artwork-info {
-  padding: 0.5rem 0 0;
+  padding: 0 0 1.3rem;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
@@ -496,14 +497,24 @@ body {
   margin-top: 0.7rem;
 }
 
+/* No border or background: Victoria asked for the boxes to go. The selected
+   thumbnail is marked by opacity instead, so the indicator survives the frame.
+   aria-selected on the button carries it for screen readers either way. */
 .artwork-thumb {
-  border: 1px solid #cdcdc9;
-  background: #e8e8e5;
+  border: 0;
+  background: none;
   padding: 0;
   cursor: pointer;
   width: 64px;
   height: 64px;
   overflow: hidden;
+  opacity: 0.45;
+  transition: opacity 0.15s ease;
+}
+
+.artwork-thumb:hover,
+.artwork-thumb:focus-visible {
+  opacity: 0.8;
 }
 
 .artwork-thumb img {
@@ -514,7 +525,7 @@ body {
 }
 
 .artwork-thumb.active {
-  border-color: #121212;
+  opacity: 1;
 }
 
 /* Admin panel */
