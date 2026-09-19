@@ -398,14 +398,17 @@ body {
 
 .trabajo-stage { padding-top: 0; }
 
+/* No border and no background here on purpose. object-fit: contain letterboxes
+   anything that is not the box's ratio, so a filled background showed as grey
+   slabs beside a portrait drawing — Victoria asked for the frame to go so it
+   stops interfering with the work. The letterbox is now the page colour and
+   reads as empty space. */
 .artwork-display img {
   display: block;
   width: 100%;
   max-height: calc(100vh - 100px);
   object-fit: contain;
   object-position: center top;
-  border: 1px solid #cdcdc9;
-  background: #e8e8e5;
   transition: opacity 0.2s ease;
 }
 
