@@ -144,12 +144,11 @@ body {
   color: #505050;
 }
 
+/* The active link is marked by bold only: no underline, no italics. 700, not
+   500: Arial (the Windows fallback) has no 500, so 500 rendered as regular. */
 .sidebar-secondary a.nav-active {
   color: #121212;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  font-weight: 700;
 }
 
 .sidebar-social {
@@ -513,10 +512,7 @@ body {
 
 .nav-toggle.nav-active {
   color: #121212;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  font-weight: 700;
 }
 
 .nav-accordion-body {
@@ -550,7 +546,7 @@ body {
 }
 
 .sub-nav a:hover { color: #252525; }
-.sub-nav a.sub-active { color: #121212; font-weight: 500; }
+.sub-nav a.sub-active { color: #121212; font-weight: 700; }
 
 .sub-nav a:focus-visible {
   outline: 1.5px solid #121212;

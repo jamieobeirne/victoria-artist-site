@@ -128,3 +128,36 @@ describe('enlarging the featured image', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })
+
+describe('active link is bold, one mother at a time', () => {
+  beforeEach(() => {
+    push.mockClear()
+    ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [entry], proyectos: [] })
+  })
+
+  it('on /statement, Statement is the active mother', async () => {
+    await renderAt('/statement', <StatementPage />)
+    expect(screen.getByRole('link', { name: 'Statement' })).toHaveClass('nav-active')
+    expect(document.querySelectorAll('.nav-active')).toHaveLength(1)
+  })
+
+  it('clicking another mother moves the bold to it', async () => {
+    await renderAt('/statement', <StatementPage />)
+    await userEvent.click(screen.getByRole('button', { name: 'Trabajo' }))
+    expect(screen.getByRole('button', { name: 'Trabajo' })).toHaveClass('nav-active')
+    expect(screen.getByRole('link', { name: 'Statement' })).not.toHaveClass('nav-active')
+    expect(document.querySelectorAll('.nav-active')).toHaveLength(1)
+  })
+
+  it('choosing a child bolds it with its mother, and another mother clears both', async () => {
+    await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByRole('button', { name: 'Trabajo' }))
+    await userEvent.click(screen.getByText('Serie recien creada'))
+    expect(screen.getByRole('link', { name: 'Serie recien creada' })).toHaveClass('sub-active')
+    expect(screen.getByRole('button', { name: 'Trabajo' })).toHaveClass('nav-active')
+    await userEvent.click(screen.getByRole('button', { name: 'Proyectos' }))
+    expect(screen.getByRole('button', { name: 'Proyectos' })).toHaveClass('nav-active')
+    expect(screen.getByRole('button', { name: 'Trabajo' })).not.toHaveClass('nav-active')
+    expect(screen.getByRole('link', { name: 'Serie recien creada' })).not.toHaveClass('sub-active')
+  })
+})
