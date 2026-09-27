@@ -5,6 +5,8 @@ import { readManifest } from '@/lib/manifest'
 
 jest.mock('@/lib/manifest', () => ({ readManifest: jest.fn(), writeManifest: jest.fn() }))
 
+const noParams = { searchParams: Promise.resolve({}) }
+
 describe('image placement', () => {
   beforeEach(() => {
     ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [], proyectos: [] })
@@ -23,7 +25,7 @@ describe('image placement', () => {
   })
 
   it('home page default image is home.jpg when no artwork is selected', async () => {
-    render(await HomePage())
+    render(await HomePage(noParams))
     const img = screen.getByAltText('Obra destacada')
     expect(img).toHaveAttribute('src', '/images/home.jpg')
   })
@@ -42,7 +44,13 @@ describe('image placement', () => {
       ],
       proyectos: [],
     })
-    render(await HomePage())
+    render(await HomePage(noParams))
     expect(screen.getByText('Serie recien creada')).toBeInTheDocument()
+  })
+
+  it('arriving with ?abrir=trabajo opens only the Trabajo menu', async () => {
+    render(await HomePage({ searchParams: Promise.resolve({ abrir: 'trabajo' }) }))
+    expect(screen.getByRole('button', { name: 'Trabajo' }).parentElement).toHaveClass('open')
+    expect(screen.getByRole('button', { name: 'Proyectos' }).parentElement).not.toHaveClass('open')
   })
 })

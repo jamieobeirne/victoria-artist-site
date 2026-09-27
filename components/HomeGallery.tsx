@@ -7,11 +7,20 @@ import type { Entry } from '@/lib/schema'
 
 const UNTITLED = 'Sin título'
 
-export function HomeGallery({ trabajo, proyectos }: { trabajo: Entry[]; proyectos: Entry[] }) {
+export function HomeGallery({
+  trabajo,
+  proyectos,
+  initialOpen,
+}: {
+  trabajo: Entry[]
+  proyectos: Entry[]
+  // Set when arriving from an inner page's Trabajo/Proyectos link, so that menu starts open.
+  initialOpen?: 'trabajo' | 'proyectos'
+}) {
   const [activeEntry, setActiveEntry] = useState<Entry | null>(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
-  const [trabajoOpen, setTrabajoOpen] = useState(false)
-  const [proyectosOpen, setProyectosOpen] = useState(false)
+  const [trabajoOpen, setTrabajoOpen] = useState(initialOpen === 'trabajo')
+  const [proyectosOpen, setProyectosOpen] = useState(initialOpen === 'proyectos')
   const [cvOpen, setCvOpen] = useState(false)
 
   function selectEntry(entry: Entry) {

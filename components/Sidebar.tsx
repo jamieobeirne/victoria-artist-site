@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 interface SidebarProps {
-  activePage?: 'statement' | 'bio' | 'cv' | 'trabajo' | 'proyectos'
+  activePage?: 'statement' | 'bio' | 'cv'
 }
 
 
@@ -23,13 +23,9 @@ export default function Sidebar({ activePage }: SidebarProps) {
       <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
         <Link href="/home">Inicio</Link>
 
-        <Link href="/trabajo" className={activePage === 'trabajo' ? 'nav-active' : ''}>
-          Trabajo
-        </Link>
+        <Link href="/home?abrir=trabajo">Trabajo</Link>
 
-        <Link href="/proyectos" className={activePage === 'proyectos' ? 'nav-active' : ''}>
-          Proyectos
-        </Link>
+        <Link href="/home?abrir=proyectos">Proyectos</Link>
 
         <Link href="/statement" className={activePage === 'statement' ? 'nav-active' : ''}>
           Statement

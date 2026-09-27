@@ -1,6 +1,6 @@
 import Sidebar from './Sidebar'
 
-type ActivePage = 'statement' | 'bio' | 'cv' | 'trabajo' | 'proyectos'
+type ActivePage = 'statement' | 'bio' | 'cv'
 
 interface InnerLayoutProps {
   // Optional: /privacidad is a real page but not a menu item, so nothing in
