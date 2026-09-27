@@ -49,7 +49,7 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     throw err
   }
 
-  revalidatePath('/home')
+  revalidatePath('/', 'layout')
 
   return NextResponse.json({ ok: true })
 }
@@ -83,7 +83,7 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     throw err
   }
 
-  revalidatePath('/home')
+  revalidatePath('/', 'layout')
 
   // Manifest write already succeeded — the entry is gone either way. R2 cleanup
   // is best-effort: log failures rather than reporting the delete as failed.

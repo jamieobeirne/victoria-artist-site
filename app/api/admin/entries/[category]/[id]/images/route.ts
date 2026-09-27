@@ -49,7 +49,7 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
     throw err
   }
 
-  revalidatePath('/home')
+  revalidatePath('/', 'layout')
 
   return NextResponse.json({ ok: true })
 }

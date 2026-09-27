@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     throw err
   }
 
-  revalidatePath('/home')
+  revalidatePath('/', 'layout')
 
   return NextResponse.json({ entry }, { status: 201 })
 }

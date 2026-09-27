@@ -6,9 +6,8 @@ const ADDRESS = 'victoriard6@gmail.com'
 const HIDE_AFTER_MS = 10000
 
 /**
- * Owns the whole contact block — both icons and the reveal — because Sidebar
- * and HomeGallery duplicate each other's markup and have drifted apart once
- * already. One copy here means they cannot.
+ * Owns the whole contact block — both icons and the reveal. Rendered once, by
+ * the shared Sidebar in app/(site)/layout.tsx.
  *
  * The envelope is a button, not a mailto: link. A mailto: does nothing at all
  * on a machine with no mail handler registered — the browser flashes the target

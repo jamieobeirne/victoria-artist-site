@@ -38,7 +38,7 @@ export async function DELETE(_req: NextRequest, { params }: RouteParams) {
     throw err
   }
 
-  revalidatePath('/home')
+  revalidatePath('/', 'layout')
 
   try {
     await deleteObject(keyFromPublicUrl(removedImage.url))
