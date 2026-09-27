@@ -155,12 +155,26 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: calc(0.9rem + 10px);
+  gap: 14px;
 }
 
+/* Small and light, set apart below the menu. The padding with a matching
+   negative margin keeps a comfortable tap target on phones without changing
+   how the icons sit. */
 .social-icon {
-  color: #505050;
+  color: #7a7a7a;
   display: inline-flex;
+}
+
+/* Two classes so it wins over .contact-toggle's padding: 0 on the envelope. */
+.sidebar-social .social-icon {
+  padding: 6px;
+  margin: -6px;
+}
+
+.social-icon svg {
+  width: 13px;
+  height: 13px;
 }
 
 .social-icon:hover {
@@ -176,6 +190,15 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.55rem;
+  margin-top: 2.2rem;
+}
+
+/* Short rule between the menu and the contact icons. */
+.sidebar-contact::before {
+  content: '';
+  width: 22px;
+  border-top: 1px solid #c9c6c0;
+  margin-bottom: 0.45rem;
 }
 
 .contact-toggle {
