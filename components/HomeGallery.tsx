@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useGallery } from './GalleryContext'
 
@@ -10,6 +11,30 @@ const UNTITLED = 'Sin título'
 export function HomeGallery() {
   const router = useRouter()
   const { activeEntry, activeImageIndex, setActiveImageIndex, manifestError } = useGallery()
+  const [enlarged, setEnlarged] = useState(false)
+
+  // A different entry or image always starts at the normal size.
+  const [shownKey, setShownKey] = useState(`${activeEntry?.id}:${activeImageIndex}`)
+  const key = `${activeEntry?.id}:${activeImageIndex}`
+  if (key !== shownKey) {
+    setShownKey(key)
+    setEnlarged(false)
+  }
+
+  // Escape closes, and the page behind does not scroll while enlarged.
+  useEffect(() => {
+    if (!enlarged) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setEnlarged(false)
+    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [enlarged])
 
   if (manifestError) {
     return (
@@ -31,10 +56,15 @@ export function HomeGallery() {
           <span className="artwork-title">{activeEntry ? activeEntry.title || UNTITLED : ''}</span>
           {activeEntry?.description && <span className="artwork-desc">{activeEntry.description}</span>}
         </div>
-        <img
-          src={activeImage?.url ?? '/images/home.jpg'}
-          alt={activeEntry ? activeEntry.title || UNTITLED : 'Obra destacada'}
-        />
+        {activeEntry && activeImage ? (
+          // Only an entry's image enlarges; the default home image stays as it is.
+          <button type="button" className="artwork-zoom" aria-label="Ampliar imagen" onClick={() => setEnlarged(true)}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- same reason as the stage image: already compressed at upload */}
+            <img src={activeImage.url} alt={activeEntry.title || UNTITLED} />
+          </button>
+        ) : (
+          <img src="/images/home.jpg" alt="Obra destacada" />
+        )}
         {activeEntry && activeEntry.images.length > 1 && (
           <div className="artwork-thumbs" role="tablist" aria-label="Imagenes de la entrada">
             {activeEntry.images.map((image, index) => (
@@ -52,6 +82,23 @@ export function HomeGallery() {
           </div>
         )}
       </div>
+
+      {enlarged && activeEntry && activeImage && (
+        // Any click closes it: on the image or on the space around it.
+        <div
+          className="artwork-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${activeEntry.title || UNTITLED} — ampliada`}
+          onClick={() => setEnlarged(false)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- same reason as the stage image: already compressed at upload */}
+          <img src={activeImage.url} alt={activeEntry.title || UNTITLED} />
+          <button type="button" className="artwork-lightbox-close" aria-label="Cerrar" autoFocus>
+            ×
+          </button>
+        </div>
+      )}
     </section>
   )
 }

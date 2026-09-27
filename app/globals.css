@@ -412,6 +412,72 @@ body {
   transition: opacity 0.2s ease;
 }
 
+/* The featured image is a button so it can be enlarged by click, tap or
+   keyboard. Reset to look exactly like the bare image it wraps. */
+.artwork-zoom {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.artwork-zoom:focus-visible {
+  outline: 1px solid #8a867f;
+  outline-offset: 4px;
+}
+
+/* Enlarged view. The backdrop is the page colour, not black, so the drawing
+   keeps the same surroundings it has on the page, only bigger. */
+.artwork-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 3vw, 40px);
+  background: #f4f4f2;
+  cursor: zoom-out;
+  animation: lightbox-in 0.2s ease;
+}
+
+.artwork-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  animation: lightbox-img-in 0.25s ease;
+}
+
+.artwork-lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #202020;
+  cursor: pointer;
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-img-in {
+  from { transform: scale(0.96); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-lightbox,
+  .artwork-lightbox img { animation: none; }
+}
+
 /* Sits above the image, so the breathing room goes underneath it. */
 .artwork-info {
   padding: 0 0 1.3rem;

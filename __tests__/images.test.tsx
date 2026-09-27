@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import GatewayPage from '../app/page'
 import SiteLayout from '../app/(site)/layout'
@@ -95,5 +95,36 @@ describe('shared sidebar', () => {
     await renderAt('/home', <HomePage />)
     expect(screen.getByRole('link', { name: 'Statement' })).toBeInTheDocument()
     expect(screen.getByText('No se pudo cargar la galeria en este momento.')).toBeInTheDocument()
+  })
+})
+
+describe('enlarging the featured image', () => {
+  beforeEach(() => {
+    push.mockClear()
+    ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [entry], proyectos: [] })
+  })
+
+  it('the default home image cannot be enlarged', async () => {
+    await renderAt('/home', <HomePage />)
+    expect(screen.queryByRole('button', { name: 'Ampliar imagen' })).not.toBeInTheDocument()
+  })
+
+  it('clicking an entry image enlarges it, and a click anywhere returns it to normal', async () => {
+    await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByText('Serie recien creada'))
+    await userEvent.click(screen.getByRole('button', { name: 'Ampliar imagen' }))
+    const dialog = screen.getByRole('dialog')
+    expect(within(dialog).getByAltText('Serie recien creada')).toHaveAttribute('src', entry.images[0].url)
+    await userEvent.click(dialog)
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('Escape returns the enlarged image to normal', async () => {
+    await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByText('Serie recien creada'))
+    await userEvent.click(screen.getByRole('button', { name: 'Ampliar imagen' }))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    await userEvent.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })
