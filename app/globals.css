@@ -68,7 +68,8 @@ body {
 
 .title-band h1 {
   margin: 0;
-  font-weight: 500;
+  font-family: var(--font-roboto), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: clamp(1.15rem, 2.8vw, 2.2rem);
@@ -112,12 +113,13 @@ body {
 
 .sidebar-name {
   margin: 0;
+  font-family: var(--font-roboto), "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: clamp(1rem, 1.6vw, 1.55rem);
   white-space: nowrap;
   line-height: 1.1;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 300;
   color: #121212;
 }
 
