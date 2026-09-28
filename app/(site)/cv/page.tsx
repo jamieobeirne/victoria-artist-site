@@ -1,3 +1,5 @@
+import { L } from '@/components/LangContext'
+
 export const metadata = { title: 'CV — Victoria Ruiz Diaz' }
 
 export default function CvPage() {
@@ -6,14 +8,17 @@ export default function CvPage() {
       <header className="inner-header">
         <h3 className="inner-heading">CV</h3>
       </header>
+      {/* The entries themselves stay in Spanish: most are the names of shows,
+          prizes and institutions, which are not translated. */}
+      <L es={null} en={<p className="cv-note" lang="en">Entries are listed in their original Spanish.</p>} />
       <table className="bio-table cv-table">
         <tbody>
           <tr>
-            <td>nacida</td>
+            <td><L es="nacida" en="born" /></td>
             <td>6 de diciembre de 1984 &mdash; General Ramírez, Entre Ríos, Argentina.</td>
           </tr>
           <tr>
-            <td>formación</td>
+            <td><L es="formación" en="education" /></td>
             <td>
               Titulada como Gestora Cultural (UNER).<br />
               Realizó estudios en Artes Visuales (UADER) y Licenciatura en Diseño de la Comunicación
@@ -21,7 +26,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>actividad docente</td>
+            <td><L es="actividad docente" en="teaching" /></td>
             <td>
               2010 al 2014 &mdash; Dictado de talleres de producción audiovisual de modo migrante.<br />
               2012 &mdash; Dictado de clases particulares de edición de video. Santa Fe capital.<br />
@@ -34,7 +39,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>muestras colectivas e individuales</td>
+            <td><L es="muestras colectivas e individuales" en="group and solo exhibitions" /></td>
             <td>
               2005-2006-2007 &mdash; Exposiciones diversas de producción de obras en la Facultad de
               Humanidades, Artes y Ciencias Sociales, UADER. Paraná, Entre Ríos.<br />
@@ -78,7 +83,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>salones, concursos y premios</td>
+            <td><L es="salones, concursos y premios" en="salons, competitions and awards" /></td>
             <td>
               2010 &mdash; Participación en la 9na. Bienal de Arte Joven UNL. Santa Fe capital.<br />
               2011 &mdash; VIII Concurso Ilustrado Poesía Catalana por la obra “Visc I Torno”, de la
@@ -105,7 +110,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>gestión, producción y curaduría</td>
+            <td><L es="gestión, producción y curaduría" en="management, production and curating" /></td>
             <td>
               2005-2006-2007 &mdash; Producción y gestión de la I, II y III Jornada Cultural en Artes
               Visuales, realizadas en el marco del día del artista plástico, con la propuesta de reunir
@@ -120,7 +125,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>residencias, clínicas y talleres</td>
+            <td><L es="residencias, clínicas y talleres" en="residencies, clinics and workshops" /></td>
             <td>
               2012 &mdash; Taller de producción y análisis de obra a cargo de los artistas Lucas
               Mercado y Francisco Vásquez. Paraná, E. Ríos.<br />
@@ -146,7 +151,7 @@ export default function CvPage() {
             </td>
           </tr>
           <tr>
-            <td>publicaciones</td>
+            <td><L es="publicaciones" en="publications" /></td>
             <td>
               2011 &mdash; Publicación en la revista española Carpaccio Magazine, publicada mensualmente
               (online e impresa) por la editorial Atem Books, creada para promover el trabajo de

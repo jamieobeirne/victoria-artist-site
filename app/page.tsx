@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import LangToggle from '@/components/LangToggle'
+import { L } from '@/components/LangContext'
 
 export default function GatewayPage() {
   return (
@@ -18,7 +20,12 @@ export default function GatewayPage() {
             <div className="title-band">
               <h1 id="gateway-title">Victoria Ruiz Diaz</h1>
             </div>
-            <Link href="/home" className="enter-btn">Entrar</Link>
+            <div className="gateway-actions">
+              <Link href="/home" className="enter-btn">
+                <L es="Entrar" en="Enter" />
+              </Link>
+              <LangToggle className="gateway-lang" />
+            </div>
           </div>
         </div>
       </section>

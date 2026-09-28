@@ -6,8 +6,8 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import type { Entry } from '@/lib/schema'
 import { useGallery } from './GalleryContext'
-
-const UNTITLED = 'Sin título'
+import { useLang } from './LangContext'
+import LangToggle from './LangToggle'
 
 // The top-level ("mother") items. Exactly one is bold at a time: the last one
 // clicked. Its child (an entry, Bio or CV extendido) is bold only while that
@@ -20,6 +20,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
   const pathname = usePathname()
   const router = useRouter()
   const { activeEntry, selectEntry, resetToDefault } = useGallery()
+  const { t } = useLang()
 
   const onHome = pathname === '/home'
   const onCv = pathname === '/bio' || pathname === '/cv'
@@ -66,22 +67,22 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
           showEntry(entry, category)
         }}
       >
-        {entry.title || UNTITLED}
+        {entry.title || t.untitled}
       </a>
     ))
   }
 
   return (
-    <aside className="content-sidebar" aria-label="Menu principal">
+    <aside className="content-sidebar" aria-label={t.mainMenu}>
       <div>
         <Link href="/home" className="inner-page-name" onClick={goHome}>
           <h2 className="sidebar-name">Victoria Ruiz Diaz</h2>
         </Link>
       </div>
 
-      <nav className="sidebar-nav sidebar-secondary" aria-label="Navegacion secundaria">
+      <nav className="sidebar-nav sidebar-secondary" aria-label={t.secondaryNav}>
         <Link href="/home" className={section === 'inicio' ? 'nav-active' : ''} onClick={goHome}>
-          Inicio
+          {t.home}
         </Link>
 
         <div className={`nav-accordion-item${trabajoOpen ? ' open' : ''}`}>
@@ -94,7 +95,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
               setTrabajoOpen(o => !o)
             }}
           >
-            Trabajo
+            {t.work}
           </button>
           <div className="nav-accordion-body">
             <div className="accordion-inner">
@@ -113,7 +114,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
               setProyectosOpen(o => !o)
             }}
           >
-            Proyectos
+            {t.projects}
           </button>
           <div className="nav-accordion-body">
             <div className="accordion-inner">
@@ -127,7 +128,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
           className={section === 'statement' ? 'nav-active' : ''}
           onClick={() => setSection('statement')}
         >
-          Statement
+          {t.statement}
         </Link>
 
         <div className={`nav-accordion-item${cvOpen ? ' open' : ''}`}>
@@ -140,7 +141,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
               setCvOpen(o => !o)
             }}
           >
-            CV
+            {t.cv}
           </button>
           <div className="nav-accordion-body">
             <div className="accordion-inner">
@@ -150,14 +151,14 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
                   className={section === 'cv' && pathname === '/bio' ? 'sub-active' : ''}
                   onClick={() => setSection('cv')}
                 >
-                  Bio
+                  {t.bio}
                 </Link>
                 <Link
                   href="/cv"
                   className={section === 'cv' && pathname === '/cv' ? 'sub-active' : ''}
                   onClick={() => setSection('cv')}
                 >
-                  CV extendido
+                  {t.fullCv}
                 </Link>
               </nav>
             </div>
@@ -165,6 +166,7 @@ export default function Sidebar({ trabajo, proyectos }: { trabajo: Entry[]; proy
         </div>
 
         <ContactLinks />
+        <LangToggle className="sidebar-lang" />
       </nav>
     </aside>
   )

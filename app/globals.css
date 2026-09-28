@@ -241,6 +241,64 @@ body {
   color: #121212;
 }
 
+/* ES / EN: set in the same grey as the unselected menu links, with the active
+   language in bold, the one mark the site uses for "you are here". */
+.lang-toggle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  color: #c9c6c0;
+}
+
+.lang-toggle button {
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  font: inherit;
+  letter-spacing: 0.04em;
+  color: #8a8a8a;
+  cursor: pointer;
+}
+
+.lang-toggle button:hover { color: #121212; }
+
+.lang-toggle button.lang-active {
+  color: #121212;
+  font-weight: 700;
+  cursor: default;
+}
+
+.lang-toggle button:focus-visible {
+  outline: 1.5px solid #121212;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sidebar-lang { margin-top: 0.35rem; }
+
+/* On the entry page it sits under Entrar, lined up with its text. */
+.gateway-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.gateway-lang {
+  padding: 0 1.8rem;
+  font-size: 0.68rem;
+  color: #6f6d68;
+}
+
+.gateway-lang button { color: #4a4a4a; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35); }
+.gateway-lang button.lang-active { color: #141414; }
+
+.cv-note {
+  font-size: 0.76rem;
+  color: #8a8a8a;
+  margin: 0 0 1rem;
+}
+
 .contact-email-link:focus-visible,
 .contact-email-copy:focus-visible {
   outline: 1.5px solid #121212;
@@ -819,6 +877,9 @@ body {
     margin-left: 0;
     padding-left: 0;
   }
+
+  .gateway-actions { align-items: flex-start; }
+  .gateway-lang { padding-left: 0; }
 
   .content-layer { padding: 14px; }
 

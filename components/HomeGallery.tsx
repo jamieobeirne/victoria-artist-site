@@ -3,14 +3,15 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useGallery } from './GalleryContext'
-
-const UNTITLED = 'Sin título'
+import { useLang } from './LangContext'
 
 // The /home stage only. The menu that picks the entry is components/Sidebar.tsx,
 // rendered once by app/(site)/layout.tsx; the two share state through GalleryContext.
 export function HomeGallery() {
   const router = useRouter()
   const { activeEntry, activeImageIndex, setActiveImageIndex, manifestError } = useGallery()
+  const { t } = useLang()
+  const UNTITLED = t.untitled
   const [enlarged, setEnlarged] = useState(false)
 
   // A different entry or image always starts at the normal size.
@@ -38,10 +39,10 @@ export function HomeGallery() {
 
   if (manifestError) {
     return (
-      <section className="trabajo-stage" aria-label="Obra seleccionada">
-        <p>No se pudo cargar la galeria en este momento.</p>
+      <section className="trabajo-stage" aria-label={t.selectedWork}>
+        <p>{t.galleryError}</p>
         <button type="button" className="form-submit" onClick={() => router.refresh()}>
-          Reintentar
+          {t.retry}
         </button>
       </section>
     )
@@ -50,7 +51,7 @@ export function HomeGallery() {
   const activeImage = activeEntry?.images[activeImageIndex]
 
   return (
-    <section className="trabajo-stage" aria-label="Obra seleccionada">
+    <section className="trabajo-stage" aria-label={t.selectedWork}>
       <div className="artwork-display">
         <div className="artwork-info">
           <span className="artwork-title">{activeEntry ? activeEntry.title || UNTITLED : ''}</span>
@@ -58,15 +59,15 @@ export function HomeGallery() {
         </div>
         {activeEntry && activeImage ? (
           // Only an entry's image enlarges; the default home image stays as it is.
-          <button type="button" className="artwork-zoom" aria-label="Ampliar imagen" onClick={() => setEnlarged(true)}>
+          <button type="button" className="artwork-zoom" aria-label={t.enlarge} onClick={() => setEnlarged(true)}>
             {/* eslint-disable-next-line @next/next/no-img-element -- same reason as the stage image: already compressed at upload */}
             <img src={activeImage.url} alt={activeEntry.title || UNTITLED} />
           </button>
         ) : (
-          <img src="/images/home.jpg" alt="Obra destacada" />
+          <img src="/images/home.jpg" alt={t.featuredWork} />
         )}
         {activeEntry && activeEntry.images.length > 1 && (
-          <div className="artwork-thumbs" role="tablist" aria-label="Imagenes de la entrada">
+          <div className="artwork-thumbs" role="tablist" aria-label={t.entryImages}>
             {activeEntry.images.map((image, index) => (
               <button
                 key={image.id}
@@ -89,12 +90,12 @@ export function HomeGallery() {
           className="artwork-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`${activeEntry.title || UNTITLED} — ampliada`}
+          aria-label={`${activeEntry.title || UNTITLED} — ${t.enlarged}`}
           onClick={() => setEnlarged(false)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- same reason as the stage image: already compressed at upload */}
           <img src={activeImage.url} alt={activeEntry.title || UNTITLED} />
-          <button type="button" className="artwork-lightbox-close" aria-label="Cerrar" autoFocus>
+          <button type="button" className="artwork-lightbox-close" aria-label={t.close} autoFocus>
             ×
           </button>
         </div>

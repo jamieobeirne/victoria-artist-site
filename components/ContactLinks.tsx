@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLang } from './LangContext'
 
 const ADDRESS = 'victoriard6@gmail.com'
 const HIDE_AFTER_MS = 10000
@@ -17,6 +18,7 @@ const HIDE_AFTER_MS = 10000
  * served HTML until a visitor asks for it.
  */
 export default function ContactLinks() {
+  const { t } = useLang()
   const [revealed, setRevealed] = useState(false)
   const [copied, setCopied] = useState(false)
   // Bumped on copy so the auto-hide timer restarts rather than pulling the
@@ -45,13 +47,13 @@ export default function ContactLinks() {
 
   return (
     <div className="sidebar-contact">
-      <div className="sidebar-social" aria-label="Redes sociales">
+      <div className="sidebar-social" aria-label={t.social}>
         <button
           type="button"
           className="social-icon contact-toggle"
           onClick={() => setRevealed(v => !v)}
           aria-expanded={revealed}
-          aria-label={revealed ? 'Ocultar dirección de correo' : 'Mostrar dirección de correo'}
+          aria-label={revealed ? t.hideEmail : t.showEmail}
         >
           <svg
             viewBox="0 0 24 24"
@@ -88,7 +90,7 @@ export default function ContactLinks() {
             {ADDRESS}
           </a>
           <button type="button" className="contact-email-copy" onClick={copy} aria-live="polite">
-            {copied ? 'copiado' : 'copiar'}
+            {copied ? t.copied : t.copy}
           </button>
         </div>
       )}

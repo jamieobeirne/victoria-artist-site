@@ -94,7 +94,7 @@ describe('shared sidebar', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
     await renderAt('/home', <HomePage />)
     expect(screen.getByRole('link', { name: 'Statement' })).toBeInTheDocument()
-    expect(screen.getByText('No se pudo cargar la galeria en este momento.')).toBeInTheDocument()
+    expect(screen.getByText('No se pudo cargar la galería en este momento.')).toBeInTheDocument()
   })
 })
 
