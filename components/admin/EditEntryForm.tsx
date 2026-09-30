@@ -13,15 +13,21 @@ export function EditEntryForm({
   id,
   initialTitle,
   initialDescription,
+  initialTitleEn = '',
+  initialDescriptionEn = '',
 }: {
   category: Category
   id: string
   initialTitle: string
   initialDescription: string
+  initialTitleEn?: string
+  initialDescriptionEn?: string
 }) {
   const router = useRouter()
   const [title, setTitle] = useState(initialTitle)
   const [description, setDescription] = useState(initialDescription)
+  const [titleEn, setTitleEn] = useState(initialTitleEn)
+  const [descriptionEn, setDescriptionEn] = useState(initialDescriptionEn)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -37,7 +43,7 @@ export function EditEntryForm({
       const res = await fetch(`/api/admin/entries/${category}/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({ title, description, titleEn, descriptionEn }),
       })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))
@@ -81,6 +87,38 @@ export function EditEntryForm({
         />
         <CharCounter value={description} max={DESCRIPTION_MAX} />
       </div>
+
+      <fieldset className="form-english">
+        <legend>En inglés (opcional)</legend>
+        <p className="form-hint">Si los rellenas, se muestran debajo del texto en español. Si los dejas vacíos, solo se ve el español.</p>
+
+        <div className="form-field">
+          <label htmlFor="edit-title-en">Título en inglés</label>
+          <input
+            id="edit-title-en"
+            lang="en"
+            value={titleEn}
+            onChange={e => setTitleEn(e.target.value)}
+            maxLength={TITLE_MAX}
+            disabled={saving}
+          />
+          <CharCounter value={titleEn} max={TITLE_MAX} />
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="edit-description-en">Descripción en inglés</label>
+          <textarea
+            id="edit-description-en"
+            lang="en"
+            value={descriptionEn}
+            onChange={e => setDescriptionEn(e.target.value)}
+            rows={4}
+            maxLength={DESCRIPTION_MAX}
+            disabled={saving}
+          />
+          <CharCounter value={descriptionEn} max={DESCRIPTION_MAX} />
+        </div>
+      </fieldset>
 
       {error && <p className="admin-error">{error}</p>}
 

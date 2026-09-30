@@ -22,6 +22,8 @@ export function NewEntryForm() {
   const [category, setCategory] = useState<'' | Category>('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [titleEn, setTitleEn] = useState('')
+  const [descriptionEn, setDescriptionEn] = useState('')
   const [images, setImages] = useState<PendingImage[]>([])
   const [submitting, setSubmitting] = useState(false)
   const [attempted, setAttempted] = useState(false)
@@ -67,7 +69,7 @@ export function NewEntryForm() {
     setError(null)
     try {
       const uploaded = await Promise.all(images.map(img => uploadImage(img, controller.signal)))
-      const payload = { category, title, description, images: uploaded }
+      const payload = { category, title, description, titleEn, descriptionEn, images: uploaded }
       const parsed = createEntryRequestSchema.safeParse(payload)
       if (!parsed.success) throw new Error(parsed.error.issues[0]?.message ?? 'Datos inválidos')
 
@@ -147,6 +149,38 @@ export function NewEntryForm() {
         />
         <CharCounter value={description} max={DESCRIPTION_MAX} />
       </div>
+
+      <fieldset className="form-english">
+        <legend>En inglés (opcional)</legend>
+        <p className="form-hint">Si los rellenas, se muestran debajo del texto en español. Si los dejas vacíos, solo se ve el español.</p>
+
+        <div className="form-field">
+          <label htmlFor="new-entry-title-en">Título en inglés</label>
+          <input
+            id="new-entry-title-en"
+            lang="en"
+            value={titleEn}
+            onChange={e => setTitleEn(e.target.value)}
+            maxLength={TITLE_MAX}
+            disabled={submitting}
+          />
+          <CharCounter value={titleEn} max={TITLE_MAX} />
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="new-entry-description-en">Descripción en inglés</label>
+          <textarea
+            id="new-entry-description-en"
+            lang="en"
+            value={descriptionEn}
+            onChange={e => setDescriptionEn(e.target.value)}
+            rows={4}
+            maxLength={DESCRIPTION_MAX}
+            disabled={submitting}
+          />
+          <CharCounter value={descriptionEn} max={DESCRIPTION_MAX} />
+        </div>
+      </fieldset>
 
       <div className="form-field">
         <label htmlFor="new-entry-images">

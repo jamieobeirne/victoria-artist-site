@@ -76,6 +76,32 @@ describe('updateEntry', () => {
     const manifest = baseManifest()
     expect(() => updateEntry(manifest, 'trabajo', 'nope', { title: 'x' })).toThrow()
   })
+
+  it('sets the English title and description alongside the Spanish', () => {
+    const next = updateEntry(baseManifest(), 'trabajo', 'e1', { titleEn: 'Series 1', descriptionEn: 'Original.' })
+    const updated = next.trabajo[0]
+    expect(updated.titleEn).toBe('Series 1')
+    expect(updated.descriptionEn).toBe('Original.')
+    expect(updated.title).toBe('Serie 1')
+  })
+})
+
+describe('createEntry — English fields', () => {
+  const images = [{ id: 'n1', url: 'https://cdn.victoriaruizdiaz.com/n1.jpg', caption: '' }]
+
+  it('stores the English only when it is written', () => {
+    const { entry } = createEntry(baseManifest(), {
+      category: 'trabajo', title: 'T', description: 'D', titleEn: 'T en', descriptionEn: '', images,
+    })
+    expect(entry.titleEn).toBe('T en')
+    expect('descriptionEn' in entry).toBe(false)
+  })
+
+  it('a Spanish-only entry has no English keys', () => {
+    const { entry } = createEntry(baseManifest(), { category: 'trabajo', title: 'T', description: 'D', images })
+    expect('titleEn' in entry).toBe(false)
+    expect('descriptionEn' in entry).toBe(false)
+  })
 })
 
 describe('deleteEntry', () => {

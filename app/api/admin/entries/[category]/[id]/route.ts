@@ -9,8 +9,12 @@ import { updateEntry, deleteEntry } from '@/lib/entries'
 import { deleteObject, keyFromPublicUrl } from '@/lib/r2'
 
 const patchBodySchema = z.object({
-  title: z.string().min(1).max(80).optional(),
-  description: z.string().min(1).max(500).optional(),
+  // Every text field is optional and may be cleared, as in the edit form, so an
+  // empty string is allowed. Untitled entries show "Sin título".
+  title: z.string().max(80).optional(),
+  description: z.string().max(500).optional(),
+  titleEn: z.string().max(80).optional(),
+  descriptionEn: z.string().max(500).optional(),
 })
 
 type RouteParams = { params: Promise<{ category: string; id: string }> }

@@ -12,6 +12,10 @@ export const entrySchema = z.object({
   id: z.string().min(1),
   title: z.string().max(80),
   description: z.string().max(500),
+  // Optional English versions, shown under the Spanish on /home. Entries saved
+  // before these existed simply lack them, so no migration is needed.
+  titleEn: z.string().max(80).optional(),
+  descriptionEn: z.string().max(500).optional(),
   images: z.array(imageItemSchema).min(1),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -26,6 +30,8 @@ export const createEntryRequestSchema = z.object({
   category: categorySchema,
   title: z.string().max(80),
   description: z.string().max(500),
+  titleEn: z.string().max(80).optional(),
+  descriptionEn: z.string().max(500).optional(),
   images: z.array(imageItemSchema).min(1),
 })
 

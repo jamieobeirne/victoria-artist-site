@@ -12,6 +12,13 @@ const baseEntry = {
 }
 
 describe('field length limits', () => {
+  it('English title and description are optional, with the same limits', () => {
+    expect(entrySchema.safeParse(baseEntry).success).toBe(true)
+    expect(entrySchema.safeParse({ ...baseEntry, titleEn: 'a'.repeat(80), descriptionEn: 'a'.repeat(500) }).success).toBe(true)
+    expect(entrySchema.safeParse({ ...baseEntry, titleEn: 'a'.repeat(81) }).success).toBe(false)
+    expect(entrySchema.safeParse({ ...baseEntry, descriptionEn: 'a'.repeat(501) }).success).toBe(false)
+  })
+
   it('accepts an 80-char title, rejects 81', () => {
     expect(entrySchema.safeParse({ ...baseEntry, title: 'a'.repeat(80) }).success).toBe(true)
     expect(entrySchema.safeParse({ ...baseEntry, title: 'a'.repeat(81) }).success).toBe(false)

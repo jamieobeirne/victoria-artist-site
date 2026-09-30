@@ -34,6 +34,8 @@ export default async function EditEntryPage({
         id={entry.id}
         initialTitle={entry.title}
         initialDescription={entry.description}
+        initialTitleEn={entry.titleEn}
+        initialDescriptionEn={entry.descriptionEn}
       />
 
       <section className="admin-section">

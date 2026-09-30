@@ -7,6 +7,9 @@ export function createEntry(manifest: Manifest, req: CreateEntryRequest): { mani
     id: randomUUID(),
     title: req.title,
     description: req.description,
+    // Stored only when written, so Spanish-only entries stay as they were.
+    ...(req.titleEn ? { titleEn: req.titleEn } : {}),
+    ...(req.descriptionEn ? { descriptionEn: req.descriptionEn } : {}),
     images: req.images,
     createdAt: now,
     updatedAt: now,
@@ -22,7 +25,7 @@ export function updateEntry(
   manifest: Manifest,
   category: Category,
   id: string,
-  patch: { title?: string; description?: string }
+  patch: { title?: string; description?: string; titleEn?: string; descriptionEn?: string }
 ): Manifest {
   const list = manifest[category]
   const idx = list.findIndex(e => e.id === id)

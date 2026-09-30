@@ -66,13 +66,13 @@ describe('shared sidebar', () => {
     ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [entry], proyectos: [] })
   })
 
-  it('on an inner page, Trabajo opens its submenu in place instead of navigating', async () => {
+  it('on an inner page, Work opens its submenu in place instead of navigating', async () => {
     await renderAt('/statement', <StatementPage />)
-    const toggle = screen.getByRole('button', { name: 'Trabajo' })
+    const toggle = screen.getByRole('button', { name: 'Work' })
     expect(toggle.parentElement).not.toHaveClass('open')
     await userEvent.click(toggle)
     expect(toggle.parentElement).toHaveClass('open')
-    expect(screen.getByRole('button', { name: 'Proyectos' }).parentElement).not.toHaveClass('open')
+    expect(screen.getByRole('button', { name: 'Projects' }).parentElement).not.toHaveClass('open')
     expect(push).not.toHaveBeenCalled()
   })
 
@@ -94,7 +94,45 @@ describe('shared sidebar', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
     await renderAt('/home', <HomePage />)
     expect(screen.getByRole('link', { name: 'Statement' })).toBeInTheDocument()
-    expect(screen.getByText('No se pudo cargar la galería en este momento.')).toBeInTheDocument()
+    expect(screen.getByText('No se pudo cargar la galeria en este momento.')).toBeInTheDocument()
+  })
+
+  it('the menu labels are English and there is no language toggle', async () => {
+    await renderAt('/statement', <StatementPage />)
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Work' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Projects' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /english|español/i })).not.toBeInTheDocument()
+  })
+})
+
+describe('English text under the Spanish', () => {
+  beforeEach(() => push.mockClear())
+
+  it('shows the English title and description under the Spanish when written', async () => {
+    const bilingual = { ...entry, titleEn: 'Newly made series', descriptionEn: 'Description.' }
+    ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [bilingual], proyectos: [] })
+    await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByText('Serie recien creada'))
+    expect(screen.getByText('Newly made series')).toHaveAttribute('lang', 'en')
+    expect(screen.getByText('Description.')).toHaveAttribute('lang', 'en')
+    expect(screen.getByText('Descripcion.')).toBeInTheDocument()
+  })
+
+  it('a Spanish-only entry shows no English line', async () => {
+    ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [entry], proyectos: [] })
+    const { container } = await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByText('Serie recien creada'))
+    expect(container.querySelector('.artwork-en')).toBeNull()
+  })
+
+  it('an English-only title does not also show "Sin título"', async () => {
+    const englishOnly = { ...entry, title: '', titleEn: 'Only English' }
+    ;(readManifest as jest.Mock).mockResolvedValue({ trabajo: [englishOnly], proyectos: [] })
+    await renderAt('/home', <HomePage />)
+    await userEvent.click(screen.getByText('Sin título'))
+    expect(screen.getByText('Only English', { selector: '.artwork-en' })).toBeInTheDocument()
+    expect(screen.queryByText('Sin título', { selector: '.artwork-title' })).not.toBeInTheDocument()
   })
 })
 
@@ -143,21 +181,21 @@ describe('active link is bold, one mother at a time', () => {
 
   it('clicking another mother moves the bold to it', async () => {
     await renderAt('/statement', <StatementPage />)
-    await userEvent.click(screen.getByRole('button', { name: 'Trabajo' }))
-    expect(screen.getByRole('button', { name: 'Trabajo' })).toHaveClass('nav-active')
+    await userEvent.click(screen.getByRole('button', { name: 'Work' }))
+    expect(screen.getByRole('button', { name: 'Work' })).toHaveClass('nav-active')
     expect(screen.getByRole('link', { name: 'Statement' })).not.toHaveClass('nav-active')
     expect(document.querySelectorAll('.nav-active')).toHaveLength(1)
   })
 
   it('choosing a child bolds it with its mother, and another mother clears both', async () => {
     await renderAt('/home', <HomePage />)
-    await userEvent.click(screen.getByRole('button', { name: 'Trabajo' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Work' }))
     await userEvent.click(screen.getByText('Serie recien creada'))
     expect(screen.getByRole('link', { name: 'Serie recien creada' })).toHaveClass('sub-active')
-    expect(screen.getByRole('button', { name: 'Trabajo' })).toHaveClass('nav-active')
-    await userEvent.click(screen.getByRole('button', { name: 'Proyectos' }))
-    expect(screen.getByRole('button', { name: 'Proyectos' })).toHaveClass('nav-active')
-    expect(screen.getByRole('button', { name: 'Trabajo' })).not.toHaveClass('nav-active')
+    expect(screen.getByRole('button', { name: 'Work' })).toHaveClass('nav-active')
+    await userEvent.click(screen.getByRole('button', { name: 'Projects' }))
+    expect(screen.getByRole('button', { name: 'Projects' })).toHaveClass('nav-active')
+    expect(screen.getByRole('button', { name: 'Work' })).not.toHaveClass('nav-active')
     expect(screen.getByRole('link', { name: 'Serie recien creada' })).not.toHaveClass('sub-active')
   })
 })

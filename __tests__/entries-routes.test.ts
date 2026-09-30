@@ -116,6 +116,23 @@ describe('PATCH /api/admin/entries/[category]/[id]', () => {
     expect((written as Manifest).trabajo[0].title).toBe('Titulo actualizado')
   })
 
+  it('saves the English fields and accepts cleared (empty) text', async () => {
+    const res = await patchEntryRoute(makeRequest({ title: '', description: '', titleEn: 'Series 1', descriptionEn: '' }), {
+      params: Promise.resolve({ category: 'trabajo', id: 'e1' }),
+    })
+    expect(res.status).toBe(200)
+    const [written] = (manifestModule.writeManifest as jest.Mock).mock.calls[0]
+    expect((written as Manifest).trabajo[0]).toMatchObject({ title: '', titleEn: 'Series 1', descriptionEn: '' })
+  })
+
+  it('rejects an 81-character English title', async () => {
+    const res = await patchEntryRoute(makeRequest({ titleEn: 'a'.repeat(81) }), {
+      params: Promise.resolve({ category: 'trabajo', id: 'e1' }),
+    })
+    expect(res.status).toBe(400)
+    expect(manifestModule.writeManifest).not.toHaveBeenCalled()
+  })
+
   it('returns 404 for an unknown entry id', async () => {
     const res = await patchEntryRoute(makeRequest({ title: 'x' }), {
       params: Promise.resolve({ category: 'trabajo', id: 'does-not-exist' }),

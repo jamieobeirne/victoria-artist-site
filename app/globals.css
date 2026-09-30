@@ -241,64 +241,6 @@ body {
   color: #121212;
 }
 
-/* ES / EN: set in the same grey as the unselected menu links, with the active
-   language in bold, the one mark the site uses for "you are here". */
-.lang-toggle {
-  display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  font-size: 0.76rem;
-  color: #c9c6c0;
-}
-
-.lang-toggle button {
-  border: 0;
-  background: none;
-  padding: 4px 0;
-  font: inherit;
-  letter-spacing: 0.04em;
-  color: #8a8a8a;
-  cursor: pointer;
-}
-
-.lang-toggle button:hover { color: #121212; }
-
-.lang-toggle button.lang-active {
-  color: #121212;
-  font-weight: 700;
-  cursor: default;
-}
-
-.lang-toggle button:focus-visible {
-  outline: 1.5px solid #121212;
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-.sidebar-lang { margin-top: 0.35rem; }
-
-/* On the entry page it sits under Entrar, lined up with its text. */
-.gateway-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.gateway-lang {
-  padding: 0 1.8rem;
-  font-size: 0.68rem;
-  color: #6f6d68;
-}
-
-.gateway-lang button { color: #4a4a4a; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35); }
-.gateway-lang button.lang-active { color: #141414; }
-
-.cv-note {
-  font-size: 0.76rem;
-  color: #8a8a8a;
-  margin: 0 0 1rem;
-}
-
 .contact-email-link:focus-visible,
 .contact-email-copy:focus-visible {
   outline: 1.5px solid #121212;
@@ -351,6 +293,18 @@ body {
 
 .inner-body p:last-child {
   margin-bottom: 0;
+}
+
+/* Bio and Statement: the English version under the Spanish, lighter, with a
+   short rule between the two. */
+.text-en {
+  margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid #e0e0dc;
+}
+
+.inner-body .text-en p {
+  color: #6b6b6b;
 }
 
 /* Bio page: portrait beside the text, wrapping to stacked when the column is
@@ -570,6 +524,10 @@ body {
 
 .artwork-title { font-size: 0.82rem; color: #252525; }
 .artwork-desc  { font-size: 0.8rem; color: #505050; line-height: 1.6; margin-top: 0.4rem; }
+
+/* English under the Spanish: same size, lighter grey (still AA on #f4f4f2). */
+.artwork-en { color: #6b6b6b; }
+.artwork-desc.artwork-en { margin-top: 0.2rem; }
 
 .nav-toggle {
   background: none;
@@ -840,6 +798,32 @@ body {
   font-size: 0.82rem;
 }
 
+/* Admin: the optional English fields, grouped under a thin rule. */
+.form-english {
+  border: none;
+  border-top: 1px solid #e0e0dc;
+  margin: 0.4rem 0 0;
+  padding: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-english legend {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #505050;
+  padding: 0 0.6rem 0 0;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #707070;
+}
+
 .char-counter {
   align-self: flex-end;
   font-size: 0.7rem;
@@ -877,9 +861,6 @@ body {
     margin-left: 0;
     padding-left: 0;
   }
-
-  .gateway-actions { align-items: flex-start; }
-  .gateway-lang { padding-left: 0; }
 
   .content-layer { padding: 14px; }
 
