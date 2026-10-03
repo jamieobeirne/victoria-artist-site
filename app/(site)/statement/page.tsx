@@ -25,12 +25,14 @@ export default function StatementPage() {
         <p>Más que producir imágenes, el dibujo abre un espacio.</p>
         <p>Un espacio para ser y permanecer.</p>
         <div className="text-en" lang="en">
-          {/* PLACEHOLDER: replace with Victoria's approved English. */}
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            I draw in order to be. For me, drawing is a practice of attention. A place where time is no longer governed by urgency, and where looking can slow down, linger, and open itself to other ways of relating to what is visible.
           </p>
+          <p>
+            I work with graphite, charcoal, and ink. The austerity of these materials supports a slow process, grounded in observation and the patient construction of each image. My practice engages with natural history and scientific illustration, not through their impulse to describe or classify, but through their potential to open up other ways of looking. The landscapes, organisms, and forms that emerge in my drawings do not seek to represent an existing world. They arise from a practice in which observation and imagination are no longer understood as opposites, but as complementary ways of approaching the visible.
+          </p>
+          <p>Rather than producing images, drawing opens up a space.</p>
+          <p>A space to be and to remain.</p>
         </div>
       </div>
     </section>
