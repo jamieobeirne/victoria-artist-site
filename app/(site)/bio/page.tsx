@@ -1,4 +1,4 @@
-export const metadata = { title: 'Bio — Victoria Ruiz Diaz' }
+export const metadata = { title: "Bio — Victoria Ruiz Diaz" };
 
 export default function BioPage() {
   return (
@@ -18,24 +18,30 @@ export default function BioPage() {
           />
         </figure>
         <div className="bio-text">
+          <p>
+            Victoria Ruíz Díaz (1984, Argentina) es artista visual y tatuadora.
+            Se formó en Artes Visuales, Gestión Cultural y Diseño de la
+            Comunicación Visual en Paraná y Santa Fe. Desde 2005 ha participado
+            en exposiciones colectivas e individuales en diversas ciudades de
+            Argentina y el exterior, recibiendo premios, becas y participando en
+            residencias artísticas en Brasil, Miami y distintas provincias
+            argentinas. Actualmente reside en Barcelona, donde continúa
+            desarrollando su obra artística y del tatuaje.
+          </p>
+          <div className="text-en" lang="en">
             <p>
-              Victoria Ruíz Díaz (1984, Argentina) es artista visual y tatuadora. Se formó en Artes
-              Visuales, Gestión Cultural y Diseño de la Comunicación Visual en Paraná y Santa Fe. Desde
-              2005 ha participado en exposiciones colectivas e individuales en diversas ciudades de
-              Argentina y el exterior, recibiendo premios, becas y participando en residencias artísticas
-              en Brasil, Miami y distintas provincias argentinas. Actualmente reside en Barcelona, donde
-              continúa desarrollando su obra artística y del tatuaje.
+              Victoria Ruíz Díaz (1984, Argentina) is a visual artist and tattoo
+              artist. She studied Visual Arts, Cultural Management, and Visual
+              Communication Design in Paraná and Santa Fe. Since 2005, she has
+              participated in solo and group exhibitions in cities across
+              Argentina and abroad, receiving awards and grants and taking part
+              in artist residencies in Brazil, Miami, and various provinces of
+              Argentina. She currently lives and works in Barcelona, where she
+              continues to develop her artistic and tattoo practice.
             </p>
-            <div className="text-en" lang="en">
-              {/* PLACEHOLDER: replace with Victoria's approved English. */}
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
